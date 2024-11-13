@@ -1,0 +1,43 @@
+{% load static %}
+<html lang="ru">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>{% block title_page %}{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <meta name="format-detection" content="telephone=no">
+		<meta name="robots" content="noindex, nofollow">		
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
+        <link rel="shortcut icon" type="image/png" href="{% static "img/favicon/favicon.ico" %}">
+        {% if current_filial.text_head_filial %}{{ current_filial.text_head_filial|safe }}{% endif %}
+        {% if project_settings.text_head %}{{ project_settings.text_body|safe }}{% endif %}
+    </head>
+	<body>
+        <!-- header-start -->
+        {% if not is_index %}
+            {% include 'includes/header/header.html' %}
+        {% else %}
+            {% include 'includes/header/header-main.html' %} 
+        {% endif %} 
+        <!-- header-end -->
+        
+        <!-- content -->
+        
+        {% block content %}
+        {% endblock %}
+        <!-- content-end -->
+        
+        <!-- footer-start -->
+        {% include 'includes/footer/footer.html' %}
+        <!-- footer-end -->
+        
+        <!-- modal-start -->
+        {% block modal %}
+        {% endblock modal %}
+        <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        {% if current_filial.text_body_filial %}{{ current_filial.text_body_filial|safe }}{% endif %}
+        {% if project_settings.text_body %}{{ project_settings.text_body|safe }}{% endif %}
+	</body>
+</html>
