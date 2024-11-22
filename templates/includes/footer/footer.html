@@ -1,1 +1,102 @@
-<h1>Footer</h1>
+{% load static %}
+<!-- FOOTER     -->
+<footer class="footer">
+    <div class="container">
+    <div class="footer__block">
+        <div class="footer__block-wrap">
+        <div class="footer__logo"> <a href="/"> <img src="{% static 'icons/logo.svg' %}" alt="logo"></a></div>
+        <div class="footer__contacts">
+            <p class="footer__block-caption">Адрес офиса:</p>
+            <p>г.Москва, ул.Москва, 00</p>
+            <p>Тел.: <a href="tel:74955555555">+7(495)-ххх-хх-хх</a></p>
+            <p>E-mail: <a href="mailto:grifix@grifix.ru">grifix@grifix.ru</a></p>
+        </div>
+        <div class="footer__social mobile">
+            <p class="footer__block-caption">Мы в соцсетях
+            <div class="footer__social-icons">
+            <div class="footer__social-icon"><a href="#"><img src="{% static 'icons/iconoir_instagram.svg' %}" alt="instagram"></a>
+            </div>
+            <div class="footer__social-icon"><a href="#"><img src="{% static 'icons/iconoir_youtube.svg' %}" alt="youtube"></a>
+            </div>
+            <div class="footer__social-icon"><a href="#"><img src="{% static 'icons/iconoir_telegram.svg' %}" alt="telegram"></a>
+            </div>
+            </div>
+            </p>
+        </div>
+        </div>
+        <div class="footer__navigation">
+        <p class="footer__block-caption">Навигация по сайту:</p><a href="/catalog.html">Каталог</a><a
+            href="/services.html">Услуги</a><a href="/offers.html">Акции</a><a href="/reviews.html">Отзывы</a><a
+            href="/about.html">О нас</a><a href="/contacts.html">Контакты</a><a href="/policy.html">Политика
+            конфиденциальности</a>
+        </div>
+        <div class="footer__social">
+        <p class="footer__block-caption">Мы в соцсетях
+        <div class="footer__social-icons">
+            <div class="footer__social-icon"><a href="#"><img src="{% static 'icons/iconoir_instagram.svg' %}" alt="instagram"></a>
+            </div>
+            <div class="footer__social-icon"><a href="#"><img src="{% static 'icons/iconoir_youtube.svg' %}" alt="youtube"></a></div>
+            <div class="footer__social-icon"><a href="#"><img src="{% static 'icons/iconoir_telegram.svg' %}" alt="telegram"></a>
+            </div>
+        </div>
+        </p>
+        </div>
+    </div>
+    <div class="footer__copyright">
+        <div class="footer__copyright-icon"> <img src="{% static 'icons/copyright.svg' %}" alt="all rights reserved"></div>
+        <div class="footer__copyright-text">
+        <p>ГРИФИКС, 2024</p>
+        </div>
+    </div>
+    </div>
+</footer>
+
+<!-- ORDER POPUP-->
+    <div class="popup__overlay order-popup__overlay">
+      <div class="popup__close order-popup__close"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg></div>
+      <div class="popup order">
+        <div class="order-popup">
+          <div class="order-popup__caption">
+            <div>Отправьте заявку</div>
+            <p>Наши менеджеры свяжутся с Вами</p>
+          </div>
+          <div class="order-popup__item">
+            <div>Название дома</div>
+            <p>Материал дома: <span>каркас</span></p>
+            <p>Площадь дома, м2: <span>215</span></p>
+          </div>
+          <div class="order-popup__form"> <input type="text" name="order-name" placeholder="Имя"><input type="text"
+              name="order-name" placeholder="+7(495)456-45-45">
+            <div class="form-block__agreement"> <label><input type="checkbox" name="agreement" checked>
+                <div class="custom-icon"></div>
+                <p>Отправляя форму, вы даёте согласие на обработку персональных данных</p>
+              </label></div>
+            <div class="form-block__button"> <button class="button" type="submit" id="order-form-submit">
+                <span>Отправить</span><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></button></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- THANK ORDER-->
+    <div class="popup__overlay thank-popup__overlay">
+      <div class="popup thank">
+        <div class="popup__close thank-popup__close"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg></div>
+        <div class="thank-popup">
+          <div class="thank-popup__caption">
+            <div>Отправьте заявку</div>
+            <p>Мы уже работаем над вашей заявкой. Скоро наш менеджер свяжется с вами.</p>
+          </div>
+        </div>
+      </div>
+    </div>

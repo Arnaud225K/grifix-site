@@ -22,6 +22,8 @@ from django.urls import reverse
 
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from .models import MenuCatalog
+from filials.views import get_current_filial
 
 
 
@@ -74,6 +76,45 @@ class IndexView(TemplateView):
             # 's_main_delivery':s_main_delivery,
             # 's_main_answers':s_main_answers,
             'is_index':is_index,
+        }
+
+        return render(request, self.template_name, context)
+    
+
+class MenuView(View):
+
+    def get(self, request, menu_slug):
+        
+        current_menu = get_object_or_404(MenuCatalog, slug=menu_slug)
+        current_filial = get_current_filial(request)
+
+        # Check if the current menu's region matches the current filial
+        if current_menu.region.exists() and not current_menu.region.filter(id=current_filial.id).exists():
+            raise Http404("This menu is not available for the current filial.")
+
+        # Prepare context for rendering
+        context = {
+            'current_menu': current_menu,
+        }
+        
+
+        return render(request, current_menu.type_menu.template, context)
+
+
+
+
+class CatalogView(View):
+    """ Class for displaying the catalog page """
+    template_name = "catalog/product_list.html"
+
+    def get(self, request, menu_slug):
+        # Check if the menu exists
+        current_menu = get_object_or_404(MenuCatalog, slug=menu_slug, is_hidden=False)
+
+
+        # Prepare context data for rendering
+        context = {
+            'current_menu': current_menu,
         }
 
         return render(request, self.template_name, context)

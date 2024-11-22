@@ -1,4 +1,6 @@
 {% load static %}
+{% load nospaces %}
+
 <html lang="ru">
 	<head>
         <meta charset="utf-8">
@@ -6,25 +8,36 @@
 		<title>{% block title_page %}{% endblock %}</title>
         <meta name="description" content="{% block meta_description %}{% endblock %}">
         <meta name="format-detection" content="telephone=no">
+        <meta property="og:title" content="{% nospaces %}{% block title_page_og %}{% endblock %}{% endnospaces %}">
+		<meta property="og:url" content="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ request.path_info }}">
+        <meta property="og:description" content="{% nospaces %}{% block meta_description_og %}{% endblock %}{% endnospaces %}">
+		<meta property="og:image" content="{% static "img/favicon/favicon.png" %}">
+		<meta property="og:type" content="website">
 		<meta name="robots" content="noindex, nofollow">		
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/nouislider.css'%}">
         <link rel="shortcut icon" type="image/png" href="{% static "img/favicon/favicon.ico" %}">
         {% if current_filial.text_head_filial %}{{ current_filial.text_head_filial|safe }}{% endif %}
         {% if project_settings.text_head %}{{ project_settings.text_body|safe }}{% endif %}
     </head>
 	<body>
-        <!-- header-start -->
+    <!-- header-start -->
+        {% include 'includes/header/header.html' %}
+    <!-- header-end -->
+        
+        <div id="preloader"> <img src="{% static 'img/images/company-logo.webp' %}" alt="">
+            <div class="blur-effect"></div>
+        </div>
+
+        <!-- Breadcrumbs-start -->
         {% if not is_index %}
-            {% include 'includes/header/header.html' %}
-        {% else %}
-            {% include 'includes/header/header-main.html' %} 
+            {% include 'includes/element/breadcrumb.html' %}
         {% endif %} 
-        <!-- header-end -->
-        
+        <!-- Breadcrumbs-end -->
         <!-- content -->
-        
         {% block content %}
+
         {% endblock %}
         <!-- content-end -->
         
@@ -37,6 +50,8 @@
         {% endblock modal %}
         <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
+        {% block script %}
+        {% endblock script %}
         {% if current_filial.text_body_filial %}{{ current_filial.text_body_filial|safe }}{% endif %}
         {% if project_settings.text_body %}{{ project_settings.text_body|safe }}{% endif %}
 	</body>

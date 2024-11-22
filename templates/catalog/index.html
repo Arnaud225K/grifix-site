@@ -2,7 +2,281 @@
 {% load static %}
 
 {% block content %}
-<section class="block_content">
-    <h1>Welcome to GrifiX</h1>
-</section>
+<main><!-- COVER MAIN PAGE-->
+      <section class="cover">
+        <picture>
+          <source scrset="{% static 'img/images/background.png' %}"><img src="{% static 'img/images/background.webp' %}" alt="">
+        </picture>
+        <div class="cover__info">
+          <div class="container">
+            <h1> <span>Сделай шаг </span>навстречу своему дому</h1>
+            <div class="cover__info-elems"><a class="button" href="#">
+                <div class="button-text">Каталог домов </div>
+                <div class="button-icon"><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="white" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg></div>
+              </a>
+              <div class="materials">
+                <div class="materials__item">Каркас</div>
+                <div class="materials__item">Брус</div>
+                <div class="materials__item">Газоблок</div>
+                <div class="materials__item">Кирпич</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="background">
+          <div class="back-figure-1"> </div>
+        </div>
+      </section><!-- MAIN PAGE HITS SECTION-->
+      <section class="hits">
+        <div class="container">
+          <div class="subheader">
+            <h2>Хиты продаж</h2>
+            <div class="subheader__line"> </div>
+          </div>
+          <div class="swiper hits__slider">
+            <div class="swiper-wrapper hits__slider-wrapper"><!-- slides-->
+              <div class="swiper-slide hits__slider-item">
+                <div class="hits__slider-title">Название дома</div>
+                <div class="hits__slider-img"> <img src="{% static 'img/images/house-card.webp' %}" alt=""></div>
+                <div class="hits__slider-descr">
+                  <div>из 5 материалов</div>
+                  <div>от<span> 3 500 000 ₽</span></div>
+                </div>
+                <div class="slider__overlay"> <a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+              <div class="swiper-slide hits__slider-item">
+                <div class="hits__slider-title">Название дома</div>
+                <div class="hits__slider-img"> <img src="{% static 'img/images/house-card.webp' %}" alt=""></div>
+                <div class="hits__slider-descr">
+                  <div>из 5 материалов</div>
+                  <div>от<span> 3 500 000 ₽</span></div>
+                </div>
+                <div class="slider__overlay"> <a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+              <div class="swiper-slide hits__slider-item">
+                <div class="hits__slider-title">Название дома</div>
+                <div class="hits__slider-img"> <img src="{% static 'img/images/house-card-2.webp' %}" alt=""></div>
+                <div class="hits__slider-descr">
+                  <div>из 5 материалов</div>
+                  <div>от<span> 3 500 000 ₽</span></div>
+                </div>
+                <div class="slider__overlay"> <a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+              <div class="swiper-slide hits__slider-item">
+                <div class="hits__slider-title">Название дома</div>
+                <div class="hits__slider-img"> <img src="{% static 'img/images/house-card-2.webp' %}" alt=""></div>
+                <div class="hits__slider-descr">
+                  <div>из 5 материалов</div>
+                  <div>от<span> 3 500 000 ₽</span></div>
+                </div>
+                <div class="slider__overlay"> <a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="hits__slider-controls slider__controls">
+            <div class="hits__slider-prev slider__controls-prev"><svg width="25" height="24" viewBox="0 0 25 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#2D896A" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg></div>
+            <div class="hits__slider-next slider__controls-next"><svg width="25" height="24" viewBox="0 0 25 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#FFFFFF" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg></div>
+          </div>
+        </div>
+      </section><!-- MAIN PAGE ABOUT SECTION-->
+      <section class="about">
+        <div class="container">
+          <div class="subheader">
+            <h2>О нас</h2>
+            <div class="subheader__line"></div>
+          </div>
+          <div class="about__content">
+            <div class="about__content-photo"> <img src="{% static 'img/images/img-about.webp' %}" alt="О нас"></div>
+            <div class="about__content-descr">
+              <div class="about__content-text">
+                <p>Компания <span>«Грификс» </span>- это профессиональное управление проектами, современные решения,
+                  новейшие технологии и первоклассные сотрудники, которые позволяют возводить объекты в запланированные
+                  сроки при оптимальной стоимости и высоком качестве строительства.</p><br>
+                <p>Каждый этап строительства производится на основании регламента по контролю качества работ.</p>
+              </div>
+              <div class="about__content-btn"> <a class="button button-green" href="#">
+                  <div class="button-text">Подробнее </div>
+                  <div class="button-icon"><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </a></div>
+            </div>
+          </div>
+        </div>
+      </section><!-- MAIN ADVANTAGES SECTION-->
+      <section class="advantages">
+        <div class="container">
+          <div class="advantages__group">
+            <div class="advantages__group-item">
+              <div class="icon">
+                <picture>
+                  <source srcset="{% static 'icons/toolbox-size-65.svg' %}" media="(max-width: 1000px)">
+                  <source srcset="{% static 'icons/toolbox-size-50.svg' %}" media="(max-width: 680px)"><img src="{% static 'icons/toolbox.svg' %}"
+                    alt="">
+                </picture>
+              </div>
+              <p class="text"> Индивидуальный подход </p>
+            </div>
+            <div class="advantages__group-item">
+              <div class="icon">
+                <picture>
+                  <source srcset="icons/clock-size-65.svg" media="(max-width: 1000px)">
+                  <source srcset="icons/clock-size-50.svg" media="(max-width: 680px)"><img src="{% static 'icons/clock.svg' %}" alt="">
+                </picture>
+              </div>
+              <p class="text"> Фиксированная цена и сроки строительства</p>
+            </div>
+            <div class="advantages__group-item">
+              <div class="icon">
+                <picture>
+                  <source srcset="icons/sert-size-65.svg" media="(max-width: 1000px)">
+                  <source srcset="icons/clock-size-50.svg" media="(max-width: 680px)"><img src="{% static 'icons/certificate.svg' %}"
+                    alt="">
+                </picture>
+              </div>
+              <p class="text"> Качественные материалы </p>
+            </div>
+            <div class="advantages__group-item">
+              <div class="icon">
+                <picture>
+                  <source srcset="{% static 'icons/crane-size-65.svg' %}" media="(max-width: 1000px)">
+                  <source srcset="{% static 'icons/crane-size-50.svg' %}" media="(max-width: 680px)"><img src="{% static 'icons/crane-tower.svg' %}"
+                    alt="">
+                </picture>
+              </div>
+              <p class="text"> Высокое качество монтажа</p>
+            </div>
+          </div>
+        </div>
+      </section><!-- BUILD SECTION-->
+      <section class="build">
+        <div class="container">
+          <div class="build__group">
+            <div class="build__group-textcol">
+              <h2>Строим <span>бассейны под ключ </span>любой сложности</h2><a class="button button-green" href="#">
+                <div class="button-text">Подробнее </div>
+                <div class="button-icon"><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg></div>
+              </a>
+            </div>
+            <div class="build__group-imgcol"> <img src="{% static 'img/images/build-pools.webp' %}" alt="Строим бассейны под ключ"></div>
+          </div>
+        </div>
+      </section><!-- PROMO SECTION-->
+      <section class="promo">
+        <div class="container">
+          <div class="subheader">
+            <h2>Акции</h2>
+            <div class="subheader__line"></div>
+          </div>
+          <div class="promo__link"> <a class="button" href="#">
+              <div class="button-text">Все акции</div>
+              <div class="button-icon"><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></div>
+            </a></div>
+          <div class="swiper promo__slider">
+            <div class="swiper-wrapper promo__slider-wrapper"><!-- slides-->
+              <div class="swiper-slide promo__slider-item">
+                <div class="promo__slider-img"> <img src="{% static 'img/images/promo-img-1.webp' %}" alt=""></div>
+                <div class="promo__slider-caption">
+                  <p>1-20 октября</p>
+                  <p>Скидка 10% на строительство бассейнов</p>
+                </div>
+                <div class="slider__overlay"> <a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+              <div class="swiper-slide promo__slider-item">
+                <div class="promo__slider-img"> <img src="{% static 'img/images/promo-img-2.webp' %}" alt=""></div>
+                <div class="promo__slider-caption">
+                  <p>1-30 октября</p>
+                  <p>Скидка 10% на проектирование хаммама</p>
+                </div>
+                <div class="slider__overlay"> <a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+              <div class="swiper-slide promo__slider-item">
+                <div class="promo__slider-img"> <img src="{% static 'img/images/promo-img-3.webp' %}" alt=""></div>
+                <div class="promo__slider-caption">
+                  <p>1-30 октября</p>
+                  <p>Скидка 20% на ворота</p>
+                </div>
+                <div class="slider__overlay"><a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+              <div class="swiper-slide promo__slider-item">
+                <div class="promo__slider-img"> <img src="{% static 'img/images/promo-img-3.webp' %}" alt=""></div>
+                <div class="promo__slider-caption">
+                  <p>1-30 октября</p>
+                  <p>Скидка 20% на ворота</p>
+                </div>
+                <div class="slider__overlay"><a class="slider__overlay-link" href="#">Подробнее</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="promo__slider-controls slider__controls">
+            <div class="promo__slider-prev slider__controls-prev"><svg width="25" height="24" viewBox="0 0 25 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#2D896A" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg></div>
+            <div class="promo__slider-next slider__controls-next"><svg width="25" height="24" viewBox="0 0 25 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#FFFFFF" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg></div>
+          </div>
+        </div>
+      </section><!-- FORM SECTION-->
+      <section class="form-section">
+        <div class="container">
+          <div class="subheader">
+            <h2>Мы на связи</h2>
+            <div class="subheader__line"></div>
+          </div><!-- FORM BLOCK-->
+          <div class="form-block">
+            <div class="form-block__caption">
+              <div class="form-block__caption-title">Оставьте заявку</div>
+              <div class="form-block__caption-descr">Наши менеджеры свяжутся с Вами</div>
+            </div>
+            <form class="form-block__contact-form">
+              <div class="form-block__input-group"><input type="text" name="name" placeholder="Имя"><input type="tel"
+                  name="phone" placeholder="+7(495) 456-45-45"></div><button class="button" type="submit">
+                <p>Отправить</p><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#FFFFFF" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+              <div class="form-block__agreement"> <label><input type="checkbox" name="agreement" checked>
+                  <div class="custom-icon"></div>
+                  <p>Отправляя форму, вы даёте согласие на обработку персональных данных</p>
+                </label></div>
+            </form>
+          </div>
+          <div class="form-block-image"><img src="{% static 'img/images/house-formblock.webp' %}" alt=""></div>
+        </div>
+      </section>
+    </main>
 {% endblock %}
+
+{% block script %}
+<script src="{% static 'js/toggleMainHeader.js' %}" defer="defer"></script>
+<script src="{% static 'js/lampAnimation.js' %}" defer="defer"></script>
+{% endblock script %}

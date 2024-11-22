@@ -31,7 +31,7 @@ DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = ['*']
 
 
-SITE_NAME = 'GrifiX'
+SITE_NAME = 'Grifix'
 VERSION_NAME = '1.0 от 12.11.24'
 START_YEAR = '2024'
 USER_NAME = getpass.getuser()
@@ -64,6 +64,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,6 +79,10 @@ INSTALLED_APPS = [
     'rangefilter',
     #Custom APPS
     'project_settings',
+    'menu',
+    'filials',
+    'static_text',
+    'material',
 ]
 
 MIDDLEWARE = [
@@ -104,8 +109,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 #Custom CONSTEXT PROCESSORS
-                # PROJECT_NAME + ".views.global_views",
-                # 'utils.breadcrumbs.breadcrumbs',
+                PROJECT_NAME + ".views.global_views",
+                'utils.breadcrumbs.breadcrumbs',
                 # 'static_text.views.static_text',
                 # 'admin_m.views.static_admin_url',
             ],
@@ -188,6 +193,108 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+JAZZMIN_SETTINGS = {
+    # 'site_header': "Petrolux",
+    # 'site_brand': "| Site Petrolux ",
+    'site_logo': "img/logo/logo-grifix-128.png",
+    # 'copyright':  "Tous droits réservés 2024",
+    "welcome_sign": "Администрирование|Грификс",
+
+    # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
+    "login_logo": None,
+
+    # Logo to use for login form in dark themes (defaults to login_logo)
+    "login_logo_dark": None,
+
+    # CSS classes that are applied to the logo above
+    "site_logo_classes": "img-circle",
+
+    # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
+    "site_icon": None,
+
+    "topmenu_links": [
+
+        # {"name": "Главная",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        # {"name": "Пользователь", "url": "/admin/accounts/user/"},
+
+        # # model admin to link to (Permissions checked against model)
+        # {"model": "AUTH_USER_MODEL.User"},
+
+        # # App with dropdown menu to all its models pages (Permissions checked against models)
+        # {"menu": "Product"},
+    ],
+
+    "order_with_respect_to": [
+        "project_settings",
+        # "menu",
+        # "menu.product",
+        # "store.cartorder",
+        # "store.cartorderitem",
+        # "menu.category",
+        # "store.brand",
+        # "store.productfaq",
+        # "store.productoffers",
+        # "store.productbidders",
+        # "store.review",
+        # "vendor",
+        # "accounts"
+        # "addons",
+        # "addons.company"
+    ],
+    
+    "icons": {
+        "admin.LogEntry": "fas fa-file",
+
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+
+        # "accounts.User": "fas fa-user",
+        # "accounts.UserProfile":"fas fa-address-card",
+
+        # "menu.Product": "fas fa-th",
+        # "menu.Category":"fas fa-tag",
+
+        # "vendor.Vendor":"fas fa-store",
+        
+    },
+    "show_ui_builder" : False
+}
+
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-lightblue",
+    "accent": "accent-navy",
+    "navbar": "navbar-lightblue navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-success",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "spacelab",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
+
+
+#Custom color Palette
 customColorPalette = [
         {
             'color': 'hsl(4, 90%, 58%)',

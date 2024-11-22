@@ -1,15 +1,10 @@
 from django.db import models
-from django_ckeditor_5.fields import CKEditor5Field
-
 
 class ProjectSettings(models.Model):
 	name = models.CharField(max_length=256, verbose_name="Название компании")
 	site_name = models.CharField(max_length=256, verbose_name="Название сайта")
 	logo = models.ImageField(upload_to='uploads/images', verbose_name="Логотип", blank=True, null=True)
-	title_text_index = models.CharField(max_length=256, verbose_name="Заголовок текста на главной странице", blank=True,
-										null=True)
-	text_index = CKEditor5Field(config_name='extends', verbose_name="Текст на главной странице", blank=True, null=True)
-	text_category = CKEditor5Field(config_name='extends', verbose_name="Текст (статический) в категории", blank=True, null=True)
+	title_text_index = models.CharField(max_length=256, verbose_name="Заголовок текста на главной странице", blank=True, null=True)
 	
 	type_company = models.CharField(max_length=256, verbose_name="Тип компании", blank=True, null=True)
 	count_staff = models.CharField(max_length=256, verbose_name="Количество сотрудников", blank=True, null=True)

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load catalog_tags %}
+
+{% block meta_description %}
+	{{ current_menu.keywords_description|my_safe:current_filial }}
+{% endblock %}
+
+{% block meta_keywords %}
+	{{ current_menu.keywords|my_safe:current_filial }}
+{% endblock %}
+
+{% block title_page %}
+	{{ current_menu.title_main|my_safe:current_filial }}
+{% endblock %}
+
+{% block title_page_og %}
+	{{ current_menu.title_main|my_safe:current_filial }}
+{% endblock %}
+
+{% block meta_description_og %}
+	{{ current_menu.keywords_description|my_safe:current_filial }}
+{% endblock %}
+
+{% block content %}
+<main class="contacts">
+    <div class="container">
+    <h1>Контакты</h1><!-- MAIN CONTENT CONTACTS-->
+    {% include "pages/contacts/contacts.html" %}<!-- FORM SECTION-->
+    {% include "includes/s-all/s-all-feedback/s-all-feedback.html" %}
+    </div>
+</main>
+{% endblock %}

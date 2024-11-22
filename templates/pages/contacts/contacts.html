@@ -1,0 +1,47 @@
+{% load static %}
+{% load catalog_tags %}
+
+<div class="contacts__wrapper">
+    <div class="contacts__info">
+    <div class="contacts__info-item">
+        <p>Телефон</p>
+        <div>
+            <a href="tel:{{ current_filial.phone|remove_space_href}}">{{ current_filial.phone }}</a>
+            <div class="copy">{{current_filial.geo|safe}}</div>
+        </div>
+    </div>
+    <div class="contacts__info-item">
+        <p>Адрес</p>
+        <div><span>{{ current_filial.address }}</span></div>
+    </div>
+    <div class="contacts__info-item">
+        <p>Почта</p>
+        <div>
+            <a href="mailto:{{ current_filial.email }}">{{ current_filial.email }}</a>
+            <div class="copy"> {{current_filial.geo|safe}}</div>
+        </div>
+    </div>
+    <div class="contacts__info-item">
+        <p>Телефон</p>
+        <div><span>{{ current_filial.rezhim }}</span></div>
+    </div>
+    </div>
+    <div class="contacts__social">
+    <p>Мы в соц.сетях</p>
+    <div class="contacts__social__wrap">
+        <div class="contacts__social-icon"><a href="#"><img src="{% static 'icons/instagram-yellow.svg' %}" alt="instagram"></a>
+        </div>
+        <div class="contacts__social-icon"><a href="#"><img src="{% static 'icons/youtube-yellow.svg' %}" alt="Youtube"></a>
+        </div>
+    </div>
+    </div>
+    <div class="contacts__map">
+    <script type="text/javascript" charset="utf-8" async
+        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A557cd166508356955668b05e593bec4f433f4db27db4efd1e404abad0bca9dac&width=100%25&height=437&lang=ru_RU&scroll=true">
+    </script>
+    </div>
+</div>
+
+
+
+

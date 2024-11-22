@@ -1,0 +1,30 @@
+{% load static %}
+<section class="form-section">
+    <div class="container">
+        <div class="subheader">
+            <h2>Мы на связи</h2>
+            <div class="subheader__line"></div>
+        </div><!-- FORM BLOCK-->
+        <div class="form-block">
+            <div class="form-block__caption">
+            <div class="form-block__caption-title">Оставьте заявку</div>
+            <div class="form-block__caption-descr">Наши менеджеры свяжутся с Вами</div>
+            </div>
+            <form class="form-block__contact-form">
+            <div class="form-block__input-group"><input type="text" name="name" placeholder="Имя"><input type="tel"
+                name="phone" placeholder="+7(495) 456-45-45"></div><button class="button" type="submit">
+                <p>Отправить</p><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#FFFFFF" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+            <div class="form-block__agreement"> <label><input type="checkbox" name="agreement" checked>
+                <div class="custom-icon"></div>
+                <p>Отправляя форму, вы даёте согласие на обработку персональных данных</p>
+                </label></div>
+            </form>
+        </div>
+        <div class="form-block-image"><img src="{% static 'img/images/house-formblock.webp' %}" alt=""></div>
+    </div>
+</section>

@@ -1,0 +1,143 @@
+    {% load static %}
+    <main class="about-page">
+      <div class="container">
+        <h1>О нас</h1><!-- MAIN CONTENT-->
+        <div class="about-page__wrapper">
+          <div class="company">
+            <div class="company__text">
+              <h2>О компании</h2>
+              <p>Компания «Грификс» - это провессиональное управление проектами, современные решения, новейшие
+                технологии и первоклассные сотрудники, которые позволяют возводить объекты в запланированные сроки
+                при оптимальной стоимости и высоком качестве строительства.</p>
+              <p>Каждый этап строительства производится на основании регламента по контролю качества работ.</p>
+            </div>
+            <div class="company__img"> <img src="{% static 'img/images/company-logo.webp' %}" alt="Логотип компании"></div>
+          </div>
+          <div class="about-page__img"> <img src="{% static 'img/images/house-company.webp' %}" alt=""></div>
+          <div class="about-page__aim">
+            <h2>Цель компании</h2>
+            <p>Предоставление широкого спектра услуг по проектированию и комплексному строительству объектов, в короткие
+              сроки на международном уровне качества.</p>
+          </div>
+          <div class="about-page__tasks">
+            <div class="about-page__tasks-col">
+              <h2>Основные задачи </h2>
+              <p>Контроль соответствия качества материалов и изделий, используемых при строительстве</p>
+            </div>
+            <div class="about-page__tasks-col">
+              <p>Обеспечение качества проводимых работ и законченных объектов требованиям проектно-сметной
+                и нормативно-технической документации</p>
+            </div>
+          </div>
+          <div class="about-page__principles">
+            <h2>Принципы работы</h2>
+            <div class="about-page__principles-wrapper">
+              <div class="principles__item">
+                <div class="principles__item-badge">1</div>
+                <div class="principles__item-text">Ответственноть перед клиентами</div>
+              </div>
+              <div class="principles__item">
+                <div class="principles__item-badge">2</div>
+                <div class="principles__item-text">Выполнение всех норм и правил строительства</div>
+              </div>
+              <div class="principles__item">
+                <div class="principles__item-badge">3</div>
+                <div class="principles__item-text">Минимальные сроки выполнения работ</div>
+              </div>
+              <div class="principles__item">
+                <div class="principles__item-badge">4</div>
+                <div class="principles__item-text">Гарантии качества наших услуг</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-page__advantages">
+            <h2>Наши преимущества</h2>
+            <div class="advantages-list">
+              <div class="advantages-list__item">
+                <div class="icon"><img src="{% static 'img/images/ph_toolbox-thin.webp' %}" alt=""></div>
+                <div class="text">
+                  <p>Индивидуальный подход </p>
+                  <p>Воплотим в жизнь ваши идеи</p>
+                </div>
+              </div>
+              <div class="advantages-list__item">
+                <div class="icon"><img src="{% static 'img/images/ph_clock-countdown-thin.webp' %}" alt=""></div>
+                <div class="text">
+                  <p>Фиксированная цена и сроки строительства</p>
+                </div>
+              </div>
+              <div class="advantages-list__item">
+                <div class="icon"><img src="{% static 'img/images/ph_certificate-thin.webp' %}" alt=""></div>
+                <div class="text">
+                  <p>Качественные материалы </p>
+                  <p>Наша компания использует для строительства только сертифицированную продукцию, что обеспечиваеи
+                    высокое качество и безопасность эксплуатации вашего дома</p>
+                </div>
+              </div>
+              <div class="advantages-list__item">
+                <div class="icon"><img src="{% static 'img/images/ph_crane-tower-thin.webp' %}" alt=""></div>
+                <div class="text">
+                  <p>Высокое качество монтажа</p>
+                  <p>Строительство дома производится сертифицированными специалистами. Работы выполняются согласно
+                    проектной документации</p>
+                </div>
+              </div>
+            </div>
+          </div><!-- REWIEWS-->
+          <div class="reviews">
+            <h2>Отзывы</h2>
+            <div class="reviews__wrapper">
+              <div class="reviews__item">
+                <div class="reviews__item-overlay"> <button type="button">Посмотреть</button></div>
+                <div class="reviews__item-video">
+                  <div class="control"><svg width="16" height="19" viewBox="0 0 16 19" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.1112 7.90722L2.64355 0.280201C2.43335 0.151485 2.19259 0.0812171 1.94616 0.0766534C1.69972 0.0720898 1.45653 0.133396 1.24171 0.254241C1.02893 0.373208 0.851686 0.546704 0.728192 0.756886C0.604699 0.967068 0.539418 1.20635 0.539062 1.45013V16.7024C0.540666 17.0681 0.687409 17.4182 0.947034 17.6757C1.20666 17.9332 1.55792 18.0771 1.92359 18.0757C2.17882 18.0756 2.4291 18.0053 2.64701 17.8724L15.1112 10.2453C15.3116 10.1232 15.4772 9.95164 15.592 9.74706C15.7069 9.54247 15.7673 9.31178 15.7673 9.07715C15.7673 8.84251 15.7069 8.61182 15.592 8.40724C15.4772 8.20266 15.3116 8.03107 15.1112 7.90895V7.90722ZM1.92359 16.686V1.46138L14.3696 9.07628L1.92359 16.686Z"
+                        fill="#0C0605"></path>
+                    </svg></div><video>
+                    <source src="{% static 'videos/vid.mp4' %}" type="video/mp4">Ваш браузер не поддерживает тег video.
+                  </video>
+                </div>
+                <div class="reviews__item-caption">Загородный дом “Скандинавия” из кирпича</div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-overlay"> <button type="button">Посмотреть</button></div>
+                <div class="reviews__item-video">
+                  <div class="control"><svg width="16" height="19" viewBox="0 0 16 19" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.1112 7.90722L2.64355 0.280201C2.43335 0.151485 2.19259 0.0812171 1.94616 0.0766534C1.69972 0.0720898 1.45653 0.133396 1.24171 0.254241C1.02893 0.373208 0.851686 0.546704 0.728192 0.756886C0.604699 0.967068 0.539418 1.20635 0.539062 1.45013V16.7024C0.540666 17.0681 0.687409 17.4182 0.947034 17.6757C1.20666 17.9332 1.55792 18.0771 1.92359 18.0757C2.17882 18.0756 2.4291 18.0053 2.64701 17.8724L15.1112 10.2453C15.3116 10.1232 15.4772 9.95164 15.592 9.74706C15.7069 9.54247 15.7673 9.31178 15.7673 9.07715C15.7673 8.84251 15.7069 8.61182 15.592 8.40724C15.4772 8.20266 15.3116 8.03107 15.1112 7.90895V7.90722ZM1.92359 16.686V1.46138L14.3696 9.07628L1.92359 16.686Z"
+                        fill="#0C0605"></path>
+                    </svg></div><video>
+                    <source src="{% static 'videos/vid.mp4' %}" type="video/mp4">Ваш браузер не поддерживает тег video.
+                  </video>
+                </div>
+                <div class="reviews__item-caption">Загородный дом “Скандинавия” из кирпича</div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-overlay"> <button type="button">Посмотреть</button></div>
+                <div class="reviews__item-video">
+                  <div class="control"><svg width="16" height="19" viewBox="0 0 16 19" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.1112 7.90722L2.64355 0.280201C2.43335 0.151485 2.19259 0.0812171 1.94616 0.0766534C1.69972 0.0720898 1.45653 0.133396 1.24171 0.254241C1.02893 0.373208 0.851686 0.546704 0.728192 0.756886C0.604699 0.967068 0.539418 1.20635 0.539062 1.45013V16.7024C0.540666 17.0681 0.687409 17.4182 0.947034 17.6757C1.20666 17.9332 1.55792 18.0771 1.92359 18.0757C2.17882 18.0756 2.4291 18.0053 2.64701 17.8724L15.1112 10.2453C15.3116 10.1232 15.4772 9.95164 15.592 9.74706C15.7069 9.54247 15.7673 9.31178 15.7673 9.07715C15.7673 8.84251 15.7069 8.61182 15.592 8.40724C15.4772 8.20266 15.3116 8.03107 15.1112 7.90895V7.90722ZM1.92359 16.686V1.46138L14.3696 9.07628L1.92359 16.686Z"
+                        fill="#0C0605"></path>
+                    </svg></div><video>
+                    <source src="{% static 'videos/vid.mp4' %}" type="video/mp4">Ваш браузер не поддерживает тег video.
+                  </video>
+                </div>
+                <div class="reviews__item-caption">Загородный дом “Скандинавия” из кирпича</div>
+              </div>
+            </div>
+            <div class="reviews__button"><a href="#" id="reviews__button-showmore"> <span>Все отзывы</span>
+                <div class="img"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg></div>
+              </a></div>
+          </div>
+        </div>
+      </div>
+    </main>
