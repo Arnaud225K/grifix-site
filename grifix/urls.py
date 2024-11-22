@@ -29,7 +29,14 @@ from .settings import SITE_NAME
 admin.site.site_header = "Администрирование " + SITE_NAME
 admin.site.site_title = SITE_NAME
 
-urlpatterns = [
+
+#Activate debug toolbar url
+if settings.DEBUG:
+    urlpatterns = [
+        path('__debug__/', include('debug_toolbar.urls')),
+    ]
+
+urlpatterns += [
     path('grifixadmin/', admin.site.urls),
     #Custom App url
     path('',include('menu.urls')),
@@ -37,14 +44,6 @@ urlpatterns = [
     #Custom library url
     path("ckeditor5/", include('django_ckeditor_5.urls')),
 ]
-
-
-
-#Activate debug toolbar url
-if settings.DEBUG:
-    urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls)),
-    ]
 
 #Serve static files
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)	

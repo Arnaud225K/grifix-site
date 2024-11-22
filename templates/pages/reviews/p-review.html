@@ -1,0 +1,43 @@
+    {% load static %}
+    <main class="reviews-page">
+      <div class="container">
+        <h1>Отзывы</h1><!--  REWIEWS MAIN CONTENT-->
+        <section class="reviews">
+          <div class="reviews__wrapper">
+          {% for review in review_list_all %}
+            <div class="reviews__item">
+              <div class="reviews__item-overlay"> <button type="button">Посмотреть</button></div>
+              <div class="reviews__item-video">
+                <div class="control"><svg width="16" height="19" viewBox="0 0 16 19" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M15.1112 7.90722L2.64355 0.280201C2.43335 0.151485 2.19259 0.0812171 1.94616 0.0766534C1.69972 0.0720898 1.45653 0.133396 1.24171 0.254241C1.02893 0.373208 0.851686 0.546704 0.728192 0.756886C0.604699 0.967068 0.539418 1.20635 0.539062 1.45013V16.7024C0.540666 17.0681 0.687409 17.4182 0.947034 17.6757C1.20666 17.9332 1.55792 18.0771 1.92359 18.0757C2.17882 18.0756 2.4291 18.0053 2.64701 17.8724L15.1112 10.2453C15.3116 10.1232 15.4772 9.95164 15.592 9.74706C15.7069 9.54247 15.7673 9.31178 15.7673 9.07715C15.7673 8.84251 15.7069 8.61182 15.592 8.40724C15.4772 8.20266 15.3116 8.03107 15.1112 7.90895V7.90722ZM1.92359 16.686V1.46138L14.3696 9.07628L1.92359 16.686Z"
+                      fill="#0C0605"></path>
+                  </svg></div><video>
+                  <source src="{{media_url}}{{ review.video }}" type="video/mp4">Ваш браузер не поддерживает тег video.
+                </video>
+              </div>
+              <div class="reviews__item-caption">{{ review.title }}</div>
+            </div>
+          {% endfor %}
+          </div>
+          <div class="reviews__button"><a class="reviews__button-showmore" href="#" id="reviews__button-showmore">
+              <span>Показать еще</span>
+              <div class="img"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></div>
+            </a></div>
+        </section>
+      </div><!-- DISCOUNT BLOCK-->
+      <section class="discount">
+        <div class="container">
+          <div class="discount__wrapper">
+            <div class="discount__image"> <img src="{% static 'img/images/ph_percent-thin.webp' %}" alt=""></div>
+            <div class="discount__text">Получите дополнительную <a href="#">скидку за видео-отзыв </a>на фоне
+              построенного дома</div>
+          </div>
+        </div>
+      </section>
+    </main>

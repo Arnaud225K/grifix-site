@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 SITE_NAME = 'Grifix'
@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'filials',
     'static_text',
     'material',
+    'o_compania',
 ]
 
 MIDDLEWARE = [
@@ -399,8 +400,9 @@ if DEBUG:
     INSTALLED_APPS += [
         'debug_toolbar',
     ]
-    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
-  
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',
         'debug_toolbar.panels.timer.TimerPanel',
@@ -416,5 +418,4 @@ if DEBUG:
         'debug_toolbar.panels.redirects.RedirectsPanel',
         'debug_toolbar.panels.profiling.ProfilingPanel',
     ]
-    
     INTERNAL_IPS = ('127.0.0.1',)

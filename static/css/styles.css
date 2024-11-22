@@ -1872,10 +1872,14 @@ button.swiper-pagination-bullet {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: column;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 66px 74px 66px 85px;
   gap: 20px;
+}
+.about-page__tasks-bloc {
+  display: flex;
 }
 .about-page__tasks-col {
   max-width: 490px;
@@ -2261,6 +2265,12 @@ button.swiper-pagination-bullet {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+  }
+  .about-page__tasks-bloc {
+    flex-direction: column;
+  }
+  .about-page__tasks-col {
+    margin-bottom: 20px;
   }
   .about-page__tasks p {
     font-size: 16px;

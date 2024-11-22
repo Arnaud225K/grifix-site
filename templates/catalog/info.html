@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% load catalog_tags %}
 
 
@@ -28,7 +30,7 @@
         {% if current_menu.slug == 'sotrudnichestvo' %}
             {% include "pages/payment-delivery/payment-delivery.html" %}
         {% elif current_menu.slug == 'otzyvy' %}
-            {% include "pages/vacancy/p-vacancy.html" %}
+            {% include "pages/reviews/p-review.html" %}
         {% elif current_menu.slug == 'policy' %}
         <h1>Page policy </h1>
         {% elif current_menu.slug == 'cookies' %}
@@ -38,3 +40,7 @@
         {% endif %}
     </div>
 {% endblock %}
+{% block script %}
+<script src="{% static 'js/about.js' %}" defer="defer"></script>
+{% endblock script %}
+

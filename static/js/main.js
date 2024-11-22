@@ -2804,5 +2804,11 @@
                             });
                         });
                 });
+
+            document.querySelectorAll(".services-list__item").forEach((e) => {
+                e.addEventListener("click", function () {
+                    e.classList.toggle("active");
+                });
+            });
         })();
 })();
