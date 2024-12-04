@@ -1,0 +1,42 @@
+<!-- PROMO SECTION-->
+<section class="promo">
+    <div class="container">
+        <div class="subheader">
+        <h2>Акции</h2>
+        <div class="subheader__line"></div>
+        </div>
+        <div class="promo__link"> 
+            <a class="button" href="/spec/">
+                <div class="button-text">Все акции</div>
+                <div class="button-icon">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+            </a>
+        </div>
+        <div class="swiper promo__slider">
+            <div class="swiper-wrapper promo__slider-wrapper"><!-- slides-->
+            {% for offer in offers_list_main %}
+                {% include "includes/cards/special-offer-card/special-offer-card-main.html" %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="promo__slider-controls slider__controls">
+            <div class="promo__slider-prev slider__controls-prev"><svg width="25" height="24" viewBox="0 0 25 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#2D896A" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+            <div class="promo__slider-next slider__controls-next"><svg width="25" height="24" viewBox="0 0 25 24"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#FFFFFF" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>

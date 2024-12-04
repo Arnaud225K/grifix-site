@@ -84,6 +84,10 @@ INSTALLED_APPS = [
     'static_text',
     'material',
     'o_compania',
+    'offers',
+    'services',
+    'import_image',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +116,7 @@ TEMPLATES = [
                 #Custom CONSTEXT PROCESSORS
                 PROJECT_NAME + ".views.global_views",
                 'utils.breadcrumbs.breadcrumbs',
-                # 'static_text.views.static_text',
+                'static_text.views.static_text',
                 # 'admin_m.views.static_admin_url',
             ],
         },

@@ -8,7 +8,7 @@
               <h2>О компании</h2>
               <p>{{ about_us_list.description|safe }}</p>
             </div>
-            <div class="company__img"> <img src="{{media_url}}{{ about_us_list.image }}" alt="Логотип компании"></div>
+            <div class="company__img"> <img src="{{media_url}}{{ about_us_list.image_1 }}" alt="Логотип компании"></div>
           </div>
           <div class="about-page__img"> <img src="{{media_url}}{{ about_us_list.image_2 }}" alt="{{ about_us_list.name }}"></div>
           <div class="about-page__aim">
@@ -43,8 +43,8 @@
               <div class="advantages-list__item">
                 <div class="icon"><img src="{{media_url}}{{ preimushes.icon }}" alt="преимущества значок {{ preimushes.order_number|floatformat:0 }}"></div>
                 <div class="text">
-                  <p>{{ preimushes.title }}</p>
-                  <p>{{ preimushes.text }}</p>
+                  {% if preimushes.title %} <p>{{ preimushes.title }}</p> {% endif %}
+                  {% if preimushes.text %}<p>{{ preimushes.text }}</p>{% endif %}
                 </div>
               </div>
             {% endfor %}

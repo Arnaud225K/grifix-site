@@ -1,0 +1,45 @@
+{% load static %}
+<main>
+    <div class="container">
+    <h1>Сотрудничество</h1>
+        <section class="cooperation-page">
+            <p>По вопросам поставок обращаться в отдел снабжения <a class="cooperation-page__link"
+                href="mailto:snab@grifix.ru">snab@grifix.ru</a></p><!-- FORM BLOCK-->
+            <div class="form-block">
+            <div class="form-block__caption">
+                <div class="form-block__caption-title">Можно заполнить форму</div>
+                <div class="form-block__caption-descr">Наши менеджеры свяжутся с Вами</div>
+            </div>
+            <form id="form_cooperation_id" class="form-block__coop-form" method="post" action="{% url 'checkout:send_form_order' %}" onsubmit="return send_form_order('form_cooperation_id');">
+                {% csrf_token %}
+                <input name="form_input" value="">
+                <input type="hidden" name="email" value="">
+                <input type="hidden" name="type" value="Сотрудничество">
+
+                <div class="form-block__coop-input-group">
+                    <input type="text" name="name" placeholder="Имя" required>
+                    <input type="tel" name="phone" placeholder="+7(999) 999-99-99" required data-phone>
+                    <input type="text" name="type_client" placeholder="Организация">
+                </div>
+                <textarea class="comment-input" type="text" name="comment" placeholder="Комментарий"></textarea>
+
+                <button class="button submit-form-btn" type="submit" id="send-coop">
+                    <p>Отправить</p>
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+                <div class="form-block__agreement"> 
+                    <label>
+                        <input type="checkbox" name="check" checked="checked" required>
+                        <div class="custom-icon"></div>
+                        <p>Отправляя форму, вы даёте согласие на обработку персональных данных</p>
+                    </label>
+                    <div class="phone-error" style="display:none; color:red;">Неправильный номер телефона</div> 
+                </div>
+            </form>
+            </div>
+            <div class="form-block-image"><img src="{% static 'img/images/house-formblock.webp' %}" alt="house-formblock"></div>
+        </section>
+    </div>
+</main>

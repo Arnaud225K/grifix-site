@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}    
+{% load catalog_tags %}
+
+{% block content %}
+    {% include "pages/product/p-product.html" %}
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/product.js' %}" defer="defer"></script>
+{% endblock script %}

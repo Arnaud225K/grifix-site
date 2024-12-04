@@ -25,17 +25,21 @@ from django.urls import reverse
 
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from .models import MenuCatalog
+from .models import MenuCatalog, House, PriceHouse
 from filials.views import get_current_filial
 from o_compania.models import About_us, Advantage, Principle, Task_company, Review
+from static_text.views import get_static_text
+from material.models import Material
 
-
-
+from offers.models import Offers
+from services.models import Services
 
 from django.template.loader import render_to_string
 
 from django.db.models import FloatField
 from django.db.models.functions import Cast
+from django.db.models import Min
+
 
 import logging
 
@@ -47,9 +51,17 @@ SIZE_SERVICE_INDEX = 6
 SIZE_CATEGORIES_INDEX = 6
 SIZE_PARTNER_INDEX = 16
 
+SIZE_OFFERS_INDEX = 4
+
+SIZE_HIT_INDEX = 4
+
 TYPE_MENU_ID_MANUFACTURE = 8
 TYPE_MENU_ID_SERVICE = 2
 
+
+INDEX_TITLE_PAGE = 'index_title_page'
+INDEX_META_DESCRIPTION = 'index_meta_description'
+INDEX_META_KEYWORDS = 'index_meta_keywords'
 
 def datetime2rfc(updated_at):
 
@@ -71,7 +83,21 @@ def get_review(current_filial):
     return list_review
 
 
+def get_material_filter(product_list):
+    # Retrieve all the materials associated with the houses in product_list
+    materials = Material.objects.filter(rel_material_price__house__in=product_list).distinct()
+    return materials
 
+def get_floor_filter(product_list=None):
+    return (
+        product_list
+        .select_related('rel_floor')
+        .exclude(floor__slug='None')
+        .values('floor__number', 'floor__slug')
+        .annotate(dcount_floor=Count('floor'))
+        .order_by('floor__number')
+        .distinct()
+    )
 
 class IndexView(TemplateView):
     template_name = "catalog/index.html"
@@ -80,26 +106,24 @@ class IndexView(TemplateView):
         
         is_index = True
         
-        # news_list = News.objects.filter(is_show_main=True, is_hidden=False)[:SIZE_SALE_INDEX]
-        # articles_list = Articles.objects.filter(is_show_main=True, is_hidden=False)[:SIZE_SALE_INDEX]
-        # spec_list = Product.objects.filter(is_spec=True, is_home=True, is_hidden=False).order_by('order_number', '-price')[:SIZE_SALE_INDEX]
-        # categories_list = MenuCatalog.objects.filter(is_hidden=False, parent_id=1, type_menu_id=6)
-        # popular_categories = MenuCatalog.objects.filter(type_menu_id__in=[6, 7], flag_main=True, is_hidden=False)[:SIZE_SALE_INDEX]
-        # partner_list = Partner.objects.filter(is_hidden=False).order_by('order_number')[:SIZE_PARTNER_INDEX]       
-        
-        # # Get the first 3 categories_list and the rest
-        # categories_list_first_three = categories_list[:3]
-        # categories_list_links = categories_list[3:9]
+        offers_list_main = Offers.objects.filter(is_show_main=True, is_hidden=False)[:SIZE_OFFERS_INDEX]
+        about_us_main = About_us.objects.filter(is_hidden=False).first()
+        if about_us_main:
+            preimushestva = about_us_main.rel_about_advantage.filter(is_hidden=False)[:SIZE_INDEX]
+        hit_product_list = House.objects.filter(is_home=True, is_hidden=False).order_by('order_number', '-price')[:SIZE_HIT_INDEX]
 
 
-        # index_title_page = get_static_text(request, locals(), INDEX_TITLE_PAGE)
-        # index_meta_description = get_static_text(request, locals(), INDEX_META_DESCRIPTION)
-        # index_meta_keywords = get_static_text(request, locals(), INDEX_META_KEYWORDS)
+        index_title_page = get_static_text(request, locals(), INDEX_TITLE_PAGE)
+        index_meta_description = get_static_text(request, locals(), INDEX_META_DESCRIPTION)
+        index_meta_keywords = get_static_text(request, locals(), INDEX_META_KEYWORDS)
         # s_main_work = get_static_text(request, locals(), 's_main_work')
         # s_main_delivery = get_static_text(request, locals(), 's_main_delivery')
         # s_main_answers = get_static_text(request, locals(), 's_main_answers')
 
         context = {
+            'hit_product_list':hit_product_list,
+            'about_us_main':about_us_main,
+            'preimushestva':preimushestva,
             # 'spec_list':spec_list,
             # 'news_list':news_list,
             # 'articles_list':articles_list,
@@ -107,13 +131,14 @@ class IndexView(TemplateView):
             # 'categories_list_links':categories_list_links,
             # 'categories_list_first_three':categories_list_first_three,
             # 'popular_categories':popular_categories,
-            # 'index_title_page':index_title_page,
-            # 'index_meta_description':index_meta_description,
-            # 'index_meta_keywords':index_meta_keywords,
+            'index_title_page':index_title_page,
+            'index_meta_description':index_meta_description,
+            'index_meta_keywords':index_meta_keywords,
             # 's_main_work':s_main_work,
             # 's_main_delivery':s_main_delivery,
             # 's_main_answers':s_main_answers,
             'is_index':is_index,
+            'offers_list_main':offers_list_main,
         }
 
         return render(request, self.template_name, context)
@@ -124,12 +149,16 @@ class MenuView(View):
 
     def get(self, request, menu_slug):
         # Préférer le préchargement des régions
-        current_menu = get_object_or_404(MenuCatalog.objects.prefetch_related('region'), slug=menu_slug)
+        current_menu = get_object_or_404(MenuCatalog.objects.prefetch_related('region','type_menu'), slug=menu_slug)
         current_filial = get_current_filial(request)
 
         # Vérifiez si la filiale actuelle est dans les régions du menu
         if current_menu.region.exists() and not current_menu.region.filter(id=current_filial.id).exists():
             raise Http404("This menu is not available for the current filial.")
+
+        services_list = []
+        if current_menu.slug == "uslugi":
+            services_list = Services.objects.filter(is_hidden=False)
 
         # Initialisation des variables
         about_us_list = None
@@ -162,15 +191,28 @@ class MenuView(View):
 
             review_list = review_list_all[:SIZE_REVIEW_INDEX]
 
+        # Fetch House lists based
+        product_list = House.objects.filter(is_hidden=False).annotate(material_count=Count('rel_house__material')).only('id', 'name', 'price')
+
+
+
+        #get
+        material_filter = get_material_filter(product_list)
+        floor_filter = get_floor_filter(product_list)
+
 
         context = {
             'current_menu': current_menu,
+            'product_list':product_list,
             'about_us_list': about_us_list,
             'zadachi_compania': zadachi_compania,
             'princip_raboty': princip_raboty,
             'preimushestva': preimushestva,
             'review_list_all':review_list_all,
             'review_list': review_list,
+            'services_list':services_list,
+            'material_filter':material_filter,
+            'floor_filter':floor_filter,
         }
 
         # Gestion de If-Modified-Since
@@ -245,11 +287,14 @@ class CatalogView(View):
     def get(self, request, menu_slug):
         # Check if the menu exists
         current_menu = get_object_or_404(MenuCatalog, slug=menu_slug, is_hidden=False)
+        product_list = House.objects.filter(is_hidden=False)
+        # product_list = House.objects.filter(is_hidden=False).annotate(material_count=Count('rel_house__material'))
 
 
         # Prepare context data for rendering
         context = {
             'current_menu': current_menu,
+            'product_list':product_list,
         }
 
         # Корректное формирование ответа сервера на запрос If-Modified-Since
@@ -260,3 +305,120 @@ class CatalogView(View):
         response = render(request, current_menu.type_menu.template, context)
         response['Last-Modified'] = datetime2rfc(current_menu.updated_at)
         return response
+    
+
+
+class ProductView(TemplateView):
+    template_name = "catalog/product.html"
+
+    def get(self, request, product_slug):
+        product = get_object_or_404(House, slug=product_slug)
+        current_menu = product.catalog
+        # current_filial = get_current_filial(request)
+
+        # material_with_price_list = PriceHouse.objects.filter(house=product).select_related('material')
+        material_with_price_list = (
+            PriceHouse.objects
+            .filter(house=product)
+            .values('material__name','material__slug')  # Group by material name
+            .annotate(min_price=Min('price'))  # Get the minimum price for each material name
+            .distinct() 
+        )
+
+        available_surfaces_list = (
+            PriceHouse.objects
+            .filter(house=product)
+            .only('surface')
+            .values_list('surface', flat=True)
+            .distinct()
+            )
+
+        # str_filter_name = current_menu.name
+        # str_filter_name_bread = current_menu.name
+        
+        # if current_menu.statictext_five:
+        #     html_static_text = get_static_text(request, locals(), current_menu.statictext_five.slug)
+        # else:
+        #     html_static_text = get_static_text(request, locals(), PRODUCT_TEXT_SLUG)
+        
+        # if current_menu.statictext_nine:
+        #     product_meta_keywords = get_static_text(request, locals(), current_menu.statictext_nine.slug)
+        # else:
+        #     how_to_buy_text = get_static_text(request, locals(), HOW_TO_BUY_TEXT_SLUG)
+
+        # if current_menu.statictext_six:
+        #     product_title_page = get_static_text(request, locals(), current_menu.statictext_six.slug)
+        # else:
+        #     product_title_page = get_static_text(request, locals(), PRODUCT_TITLE_PAGE)
+        
+        # if current_menu.statictext_seven:
+        #     product_meta_description = get_static_text(request, locals(), current_menu.statictext_seven.slug)
+        # else:
+        #     product_meta_description = get_static_text(request, locals(), PRODUCT_META_DESCRIPTION)
+        
+        # if current_menu.statictext_eight:
+        #     product_meta_keywords = get_static_text(request, locals(), current_menu.statictext_eight.slug)
+        # else:
+        #     product_meta_keywords = get_static_text(request, locals(), PRODUCT_META_KEYWORDS)
+
+        context = {
+            'current_menu':current_menu,
+            # 'current_filial':current_filial,
+            'product':product,
+            'material_with_price_list':material_with_price_list,
+            'available_surfaces_list':available_surfaces_list,
+            # 'html_static_text':html_static_text,
+            # 'product_meta_keywords':product_meta_keywords,
+            # 'how_to_buy_text':how_to_buy_text,
+            # 'product_title_page':product_title_page,
+            # 'product_meta_description':product_meta_description,
+            # 'str_filter_name':str_filter_name,
+            # 'str_filter_name_bread':str_filter_name_bread,
+        }
+
+        return render(request, self.template_name, context)
+
+
+class GetSurfacesView(View):
+    def post(self, request):
+        material_slug = request.POST.get('material_slug')
+        house_id = request.POST.get('house_id')  
+
+        if not material_slug or not house_id:
+            return JsonResponse({'error': 'material slug and house ID are required!'}, status=400)
+
+        # Récupérer le matériau correspondant au slug
+        material = get_object_or_404(Material, slug=material_slug)
+
+        available_surfaces = PriceHouse.objects.filter(
+            material=material,
+            house__id=house_id 
+        ).values_list('surface', flat=True).distinct()
+
+        surfaces_html = render_to_string('pages/product/partials/surface_select.html', {
+            'available_surfaces': available_surfaces
+        })
+
+        return JsonResponse({
+            'surfaces_html': surfaces_html,
+            'material_name': material.name  # Inclure le nom du matériau dans la réponse
+            })
+
+class PriceView(View):
+    def post(self, request):
+        material_slug = request.POST.get('material_slug')
+        surface = request.POST.get('surface')
+        
+        if not material_slug or not surface:
+            return JsonResponse({'error': 'Please select both the material and the surface!'}, status=400)
+
+        price_house = PriceHouse.objects.filter(material__slug=material_slug, surface=surface).first()
+            
+        if price_house:
+            total_price = price_house.price
+            
+
+            return JsonResponse({'total_price': total_price})
+        else:
+            return JsonResponse({'error': 'Цена не найдена!'}, status=404)
+        

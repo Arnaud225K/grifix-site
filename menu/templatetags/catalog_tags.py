@@ -29,3 +29,13 @@ def remove_space_href(value):
     characters_to_remove = ['-', '(', ')', ' ']
     pattern = '[' +  ''.join(characters_to_remove) +  ']'
     return re.sub(pattern,'', value)
+
+
+@register.filter(name='get_material_word')
+def get_material_word(count):
+    if count % 10 == 1 and count % 100 != 11:
+        return "материал"
+    elif count % 10 in [2, 3, 4] and not (count % 100 in [12, 13, 14]):
+        return "материала"
+    else:
+        return "материалов"

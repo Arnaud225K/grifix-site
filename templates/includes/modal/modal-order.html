@@ -1,0 +1,62 @@
+{% load static %}
+<!-- ORDER POPUP-->
+<div class="popup__overlay order-popup__overlay">
+    <div class="popup__close order-popup__close">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+    </div>
+    <div class="popup order">
+        <div class="order-popup">
+            <form id="form_order_id" class="form-block__order-form" action="{% url 'checkout:send_house_order' %}" onsubmit="return send_house_order('form_order_id');">                
+                {% csrf_token %}
+                <input name="form_input" value="">
+                <input type="hidden" name="comment" value="">
+                <input type="hidden" name="email" value="">
+                <input type="hidden" name="type" value="Заказ дома">
+
+                <input type="hidden" id="material-name" name="material_name" value="">
+                <input type="hidden" id="surface-house" name="surface_house" value="">
+                <input type="hidden" id="price-house" name="price_house" value="">
+                <input type="hidden" id="name-house" name="name_house" value="">
+
+                <div class="order-popup__caption">
+                    <div>Отправьте заявку</div>
+                    <p>Наши менеджеры свяжутся с Вами</p>
+                </div>
+                <div class="order-popup__item">
+                    <div>Название дома</div>
+                    <!--<p>Материал дома: <span>каркас</span></p>
+                    <p>Площадь дома, м2: <span>215</span></p>-->
+                    <p>Материал дома: <span id="popup-material"></span></p> 
+                    <p>Площадь дома, м2: <span id="popup-surface"></span></p> 
+                    <p>Стоимость: <span id="popup-price" class="k_order-price"></span></p>
+                </div>
+                <div class="order-popup__form"> 
+                <!--<input type="text" name="order-name" placeholder="Имя">
+                <input type="text" name="order-name" placeholder="+7(495)456-45-45">-->
+                <input type="text" name="name" placeholder="Имя" required>
+                <input type="tel" name="phone" placeholder="+7(999) 999-99-99" required data-phone>
+                <div class="form-block__agreement"> 
+                    <label>
+                        <input type="checkbox" name="check" checked="checked" required>
+                        <div class="custom-icon"></div>
+                        <p>Отправляя форму, вы даёте согласие на обработку персональных данных</p>
+                    </label>
+                </div>
+                <div class="form-block__button"> 
+                    <button class="button" id="order-form-submit">
+                        <span>Отправить</span>
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

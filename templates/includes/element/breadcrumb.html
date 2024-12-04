@@ -6,29 +6,16 @@
             {% endif %}
             {% if search_text %}
                 <li>{{ search_text }}</li>
+			{% elif offers_item %}
+				<li><a href='/spec/'>Акции</a></li>
+				<li>{{ news_item.name }}</li>
+			{% elif offers_list %}
+				<li>Акции</li>
             {% elif is_thank_you %}
                 <li>Спасибо за заказ</li>
             {% elif is_generic_error %}
                 <li>Ошибка</li>
             {% elif current_menu.parent %}
-                {% if current_menu.parent.parent.parent.parent %}
-                    <li>
-                        <a href="{{current_menu.parent.parent.parent.parent.get_absolute_url }}">{{ current_menu.parent.parent.parent.parent.name }}</a>
-                    </li>
-                {% endif %}
-                {% if current_menu.parent.parent.parent %}
-                    <li>
-                        <a href="{{ current_menu.parent.parent.parent.get_absolute_url }}">{{ current_menu.parent.parent.parent.name }}</a>
-                    </li>
-                {% endif %}
-                {% if current_menu.parent.parent %}
-                    <li>
-                        <a href="{{ current_menu.parent.parent.get_absolute_url }}">{{ current_menu.parent.parent.name }}</a>
-                    </li>
-                {% endif %}
-                <li>
-                    <a href="{{ current_menu.parent.get_absolute_url }}">{{ current_menu.parent.name }}</a>
-                </li>
                 {% if product %}
                     <li>
                         <a href="{{ current_menu.get_absolute_url }}">{{ current_menu.name }}</a>

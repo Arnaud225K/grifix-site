@@ -1,0 +1,36 @@
+{% load static %}
+<div class="header__block-mobile-menu">
+    <div class="line"> </div>
+    <div class="line"> </div>
+    <div class="line"></div>
+</div>
+<div class="mobile-nav">
+    <div class="mobile-nav__close">
+        <svg width="16" height="16" viewBox="0 0 26 26" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+    </div>
+    <ul class="mobile-nav__list"> 
+        <a href="/katalog-domov/"><li>Каталог</li></a>
+        <a href="/uslugi/"><li>Услуги</li></a>
+        <a href="/spec/"><li>Акции</li></a>
+        <a href="/otzyvy/"><li>Отзывы</li></a>
+        <a href="/o-nas/"><li>О нас</li></a>
+        <a href="/contacts/"><li>Контакты</li></a>
+        <a href="/sotrudnichestvo/"><li>Сотрудничество</li></a>
+        <a href="#"><li>Политика конфиденциальности</li></a>
+    </ul>
+    <div class="mobile-nav__social">
+        <div class="mobile-nav__social-icon">
+            <a href="#"><img src="{% static 'icons/instagram-green.svg' %}" alt="instagram"></a>
+        </div>
+        <div class="mobile-nav__social-icon">
+            <a href="#"><img src="{% static 'icons/youtube-green.svg' %}" alt="youtube"></a>
+        </div>
+        <div class="mobile-nav__social-icon">
+            <a href="#"><img src="{% static 'icons/telegram-green.svg' %}" alt="telegram"></a>
+        </div>
+    </div>
+</div>

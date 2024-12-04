@@ -1,0 +1,20 @@
+{% load static %}
+<section class="advantages">
+    <div class="container">
+        <div class="advantages__group">
+            {% for preimushes in preimushestva %}
+            <div class="advantages__group-item">
+                <div class="icon">
+                <picture>
+                    <source srcset="{{media_url}}{{ preimushes.icon }}" media="(max-width: 1000px)">
+                    <source srcset="{{media_url}}{{ preimushes.icon }}" media="(max-width: 680px)">
+                    <img src="{{media_url}}{{ preimushes.icon }}"
+                    alt="преимущества {{ preimushes.order_number|floatformat:0 }}">
+                </picture>
+                </div>
+                <p class="text"> {{ preimushes.title }} </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

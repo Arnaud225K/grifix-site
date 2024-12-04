@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}    
+{% block content %}
+<main class="services-page">
+    <div class="container">
+        <h1>Услуги</h1><!-- SERVICES MAIN CONTENT-->
+        {% include "pages/services-listing/p-services-listing.html" %}
+    </div><!-- ADVERTISEMENT-->
+    {% include "pages/services-listing/p-services-advice.html" %}
+    <!-- FORM SECTION-->
+    {% include "includes/s-all/s-all-feedback/s-all-feedback.html" %}
+</main>
+{% endblock %}

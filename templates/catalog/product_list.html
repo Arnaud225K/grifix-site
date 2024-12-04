@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}    
+
+{% block content %}
+    {% include "pages/product-listing/p-product-listing.html" %}
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/catalog.js' %}" defer="defer"></script>
+{% endblock script %}

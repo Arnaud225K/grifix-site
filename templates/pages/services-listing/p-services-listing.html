@@ -1,0 +1,15 @@
+<section class="services-list">
+    {% for service in services_list %}
+        <div class="services-list__item">
+            <div class="services-list__item-img"> 
+                <img src="{{media_url}}{{ service.image }}" alt="{{ service.name }}">
+            </div>
+            <div class="services-list__item-caption">
+                <p>{{ service.name }}</p>
+                <div class="services-list__item-description">
+                    <p>{{ service.description|safe }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</section>

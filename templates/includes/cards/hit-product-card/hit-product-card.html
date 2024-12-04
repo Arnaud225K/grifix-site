@@ -1,0 +1,14 @@
+{% load static %}
+<div class="swiper-slide hits__slider-item">
+    <a href="{{ product.get_absolute_url }}">
+        <div class="hits__slider-title">
+            {% if product.name_full %}{{ product.name_full }}{% else %}{{ product.name }}{% endif %}
+        </div>
+    </a>
+    <div class="hits__slider-img"> <img src="{{media_url}}{{ product.image }}" alt="{{ product.name }}"></div>
+    <div class="hits__slider-descr">
+        <div>из 5 материалов</div>
+        <div>от<span> {{ product.price }} ₽</span></div>
+    </div>
+    <div class="slider__overlay"> <a class="slider__overlay-link" href="{{ product.get_absolute_url }}">Подробнее</a></div>
+</div>

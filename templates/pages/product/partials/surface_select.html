@@ -1,0 +1,6 @@
+<select id="surface-select">
+    <option value="" disabled selected>Выберите площадь</option>
+    {% for surface in available_surfaces %}
+        <option value="{{ surface }}">{{ surface }}</option>
+    {% endfor %}
+</select>

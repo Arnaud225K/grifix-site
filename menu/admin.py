@@ -1,7 +1,10 @@
 from django.contrib import admin
 
-from .models import MenuCatalog, TypeMenu
+from .models import MenuCatalog, TypeMenu, House, PriceHouse
 
+
+class PriceHouseAdmin(admin.TabularInline):
+    model = PriceHouse
 
 class MenuCatalogAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug': ('name',)}
@@ -10,14 +13,17 @@ class MenuCatalogAdmin(admin.ModelAdmin):
 	list_filter = ('type_menu',)
 
 
-# class ProductCatalogAdmin(admin.ModelAdmin):
-# 	prepopulated_fields = {'slug': ('name',)}
-# 	list_display = ('id', 'name','slug',)
-# 	search_fields = ('name', 'slug', 'id')
-# 	list_filter = ('is_spec', 'catalog',)
+class HouseCatalogAdmin(admin.ModelAdmin):
+	inlines = (PriceHouseAdmin,)
+	prepopulated_fields = {'slug': ('name',)}
+	list_display = ('id', 'name','slug',)
+	search_fields = ('name', 'slug', 'id')
+	list_filter = ('is_hidden', 'is_home',)
 
 
 admin.site.register(MenuCatalog, MenuCatalogAdmin)
-# admin.site.register(Product, ProductCatalogAdmin)
+admin.site.register(House, HouseCatalogAdmin)
 admin.site.register(TypeMenu)
+# admin.site.register(PriceHouse)
+
 

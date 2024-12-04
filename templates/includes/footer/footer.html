@@ -50,53 +50,7 @@
     </div>
     </div>
 </footer>
-
-<!-- ORDER POPUP-->
-    <div class="popup__overlay order-popup__overlay">
-      <div class="popup__close order-popup__close"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
-            stroke-linejoin="round"></path>
-        </svg></div>
-      <div class="popup order">
-        <div class="order-popup">
-          <div class="order-popup__caption">
-            <div>Отправьте заявку</div>
-            <p>Наши менеджеры свяжутся с Вами</p>
-          </div>
-          <div class="order-popup__item">
-            <div>Название дома</div>
-            <p>Материал дома: <span>каркас</span></p>
-            <p>Площадь дома, м2: <span>215</span></p>
-          </div>
-          <div class="order-popup__form"> <input type="text" name="order-name" placeholder="Имя"><input type="text"
-              name="order-name" placeholder="+7(495)456-45-45">
-            <div class="form-block__agreement"> <label><input type="checkbox" name="agreement" checked>
-                <div class="custom-icon"></div>
-                <p>Отправляя форму, вы даёте согласие на обработку персональных данных</p>
-              </label></div>
-            <div class="form-block__button"> <button class="button" type="submit" id="order-form-submit">
-                <span>Отправить</span><svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg></button></div>
-          </div>
-        </div>
-      </div>
-    </div><!-- THANK ORDER-->
-    <div class="popup__overlay thank-popup__overlay">
-      <div class="popup thank">
-        <div class="popup__close thank-popup__close"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
-              stroke-linejoin="round"></path>
-          </svg></div>
-        <div class="thank-popup">
-          <div class="thank-popup__caption">
-            <div>Отправьте заявку</div>
-            <p>Мы уже работаем над вашей заявкой. Скоро наш менеджер свяжется с вами.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- MODAL -->
+{% include "includes/modal/modal-order.html" %}
+{% include "includes/modal/modal-thank.html" %}
+{% include "includes/modal/modal-error.html" %}

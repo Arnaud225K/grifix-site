@@ -90,6 +90,33 @@ table {
   font-weight: 600;
   font-style: semibold;
 }
+
+/*Form class error*/
+input[name="form_input"] {
+  display: none;
+}
+.phone-error {
+  margin-top: 15px;
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.k_order-error {
+  font-size: 16px;
+  font-weight: 600;
+  color: red;
+}
+
+.k_order-success {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2D896A;
+}
+.k_order-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2D896A;
+}
 /* FILTERS SECTION */
 .filters {
   margin-top: 50px;
@@ -1148,7 +1175,7 @@ button.swiper-pagination-bullet {
 }
 .house__info .dropdown__block select {
   width: 115px;
-  height: 30px;
+  height: 40px;
   padding: 7px;
   background-color: transparent;
   border: 1px solid #C5CBC9;
@@ -2742,11 +2769,27 @@ textarea.comment-input {
   padding: 63px;
   display: none;
 }
-.popup.thank {
+/* .popup.thank {
   width: 473px;
   height: 207px;
 }
+.popup.error {
+  width: 473px;
+  height: 207px;
+} */
+.popup.thank {
+  width: 573px;
+  height: 307px;
+}
+.popup.error {
+  width: 573px;
+  height: 307px;
+}
 .popup.thank-popup__close {
+  top: 10px;
+  right: 10px;
+}
+.popup.error-popup__close {
   top: 10px;
   right: 10px;
 }
@@ -2755,7 +2798,18 @@ textarea.comment-input {
   font-size: 24px;
   font-weight: 700;
 }
+.popup.error .error-popup__caption div {
+  color: #ff0000;
+  font-size: 24px;
+  font-weight: 700;
+}
 .popup.thank .thank-popup__caption p {
+  margin-top: 10px;
+  color: #194335;
+  font-size: 16px;
+  font-weight: 400;
+}
+.popup.error .error-popup__caption p {
   margin-top: 10px;
   color: #194335;
   font-size: 16px;
@@ -2793,7 +2847,8 @@ textarea.comment-input {
 
 .no-scroll {
   overflow: hidden;
-  height: 100%;
+  overflow-y: scroll !important;
+  width: 100%;
 }
 
 .order-popup__caption div {
@@ -2831,7 +2886,7 @@ textarea.comment-input {
   gap: 16px;
 }
 .order-popup__form input[type=text],
-.order-popup__form input[type=text] {
+.order-popup__form input[type=tel] {
   height: 44px;
   width: 100%;
   background-color: #F9F4EF;
@@ -2894,7 +2949,17 @@ textarea.comment-input {
   .thank-popup__caption {
     font-size: 20px;
   }
+  .error-popup__caption {
+    font-size: 20px;
+  }
   .popup.thank {
+    width: 355px;
+    height: 170px;
+    padding: 35px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .popup.error {
     width: 355px;
     height: 170px;
     padding: 35px;
@@ -3167,7 +3232,7 @@ input[type=tel] {
   border-radius: 6px;
   border: none;
   background-color: #ffffff;
-  height: 26px;
+  height: 44px;
   outline: none;
 }
 input[type=text]::-webkit-input-placeholder, input[type=tel]::-webkit-input-placeholder {
@@ -4779,7 +4844,7 @@ header {
     font-weight: 500;
   }
   .about__content-btn .button-green {
-    padding: 12px 105px;
+    padding: 12px 90px;
   }
   .advantages {
     display: block;
@@ -4824,7 +4889,7 @@ header {
     font-weight: 500;
   }
   .build__group-textcol .button {
-    padding: 10px 93px;
+    padding: 10px 73px;
   }
   .build__group-imgcol {
     position: absolute;
@@ -4994,6 +5059,11 @@ header {
   .tabbar-wrapper {
     padding: 0;
   }
+  .phone-error {
+    font-size: 16px;
+    text-align: center;
+    margin-left: 0px;
+  }
 }
 @media screen and (max-width: 490px) {
   .searchbox.show {
@@ -5004,4 +5074,16 @@ header {
     top: 10px;
     right: 10px;
   }
+  .phone-error {
+    font-size: 16px;
+    text-align: center;
+    margin-left: 0px;
+  }
+}
+
+.form-block__input-group .invalid,
+.form-block__coop-input-group .invalid,
+.order-popup__form .invalid{
+  border: 2px solid red;
+  background-color: beige;
 }

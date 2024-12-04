@@ -1,0 +1,48 @@
+<div class="house__info" data-house-id="{{ product.id }}">
+    <p class="house__info-capt">Для расчета итоговой стоимости выберите материал и площадь дома </p>
+
+    <div class="house__info-dropdowns">
+        <div class="dropdowns__item">
+        <div class="dropdown__caption">Материал дома</div>
+        <div class="dropdown__block">
+            <select id="material-select" name="material_slug">
+                <option value="" disabled selected>Выберите</option>
+                {% for material in material_with_price_list %}
+                    <option value="{{ material.material__slug }}">{{ material.material__name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        </div>
+        <div class="dropdowns__item">
+        <div class="dropdown__caption">Площадь дома, м2</div>
+        <div class="dropdown__block">
+            <select id="surface-select" name="surface">
+                <option value="" disabled selected>Выберите</option>
+
+            </select>
+            </div>
+        </div>
+    </div>
+    <div class="house__info-offers">
+    {% for price_house in material_with_price_list %}
+        <div class="offer">
+            <p>{{ price_house.material__name }}</p>
+            <p>от {{ price_house.min_price }} ₽</p>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="house__info-price">
+        <p>Стоимость*:</p>
+        <p id="total-price" class="price__sum">от {{ product.price }} ₽</p>
+        <p>*Транспортные расходы не включены в стоимость дома и рассчитываются индивидуально</p>
+        <button id="product-submit"> 
+            <span>Отправить форму</span>
+            <div class="img">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="white" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+        </button>
+    </div>
+</div>

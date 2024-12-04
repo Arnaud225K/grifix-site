@@ -30,15 +30,22 @@ admin.site.site_header = "Администрирование " + SITE_NAME
 admin.site.site_title = SITE_NAME
 
 
+
+urlpatterns = [
+    path('grifixadmin/', admin.site.urls),
+]
+
 #Activate debug toolbar url
 if settings.DEBUG:
-    urlpatterns = [
+    urlpatterns += [
         path('__debug__/', include('debug_toolbar.urls')),
     ]
 
 urlpatterns += [
-    path('grifixadmin/', admin.site.urls),
+    # path('grifixadmin/', admin.site.urls),
     #Custom App url
+    path('cart/', include('checkout.urls')),
+    path('spec/', include('offers.urls')),
     path('',include('menu.urls')),
 
     #Custom library url

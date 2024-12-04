@@ -50,6 +50,7 @@
         {% endblock modal %}
         <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
         {% block script %}
         {% endblock script %}
         {% if current_filial.text_body_filial %}{{ current_filial.text_body_filial|safe }}{% endif %}

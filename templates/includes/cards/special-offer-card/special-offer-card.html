@@ -1,0 +1,17 @@
+{% load static %}    
+<div class="services-list__item">
+    <div class="services-list__item-img">
+        {% if offer.image_2 %} 
+            <img src="{{media_url}}{{ offer.image_2 }}" alt="{{ offer.name }}">
+        {% else %}
+            <img src="{{media_url}}{{ offer.image }}" alt="{{ offer.name }}">
+        {% endif %}
+    </div>
+    <div class="services-list__item-caption">
+        <p>{{ offer.name }}</p>
+        <div class="offers__description">{{ offer.description|safe }}</div>
+        <div class="services-list__item-description">
+        <p>{{ offer.text|safe }}</p>
+        </div>
+    </div>
+</div>

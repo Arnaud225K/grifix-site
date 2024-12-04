@@ -1,0 +1,29 @@
+{% load catalog_tags %}
+<div class="products-list__item" id="product{{product.id}}">
+    <div class="products-list__item-caption">
+    <a href="{{ product.get_absolute_url }}">
+        {% if product.name_full %}
+            <p>{{ product.name_full }}</p>
+        {% else %}
+            <p>{{ product.name }}</p>
+        {% endif %}
+    </a>
+    <div class="favorite">
+        <a href="#">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 8.862C22.0034 10.4007 21.4106 11.881 20.346 12.992C17.905 15.523 15.537 18.162 13.006 20.6C12.425 21.15 11.504 21.13 10.949 20.555L3.654 12.993C1.449 10.707 1.449 7.017 3.654 4.732C4.175 4.185 4.802 3.749 5.496 3.452C6.191 3.154 6.938 3.001 7.694 3.001C8.45 3.001 9.197 3.154 9.892 3.452C10.586 3.749 11.213 4.185 11.734 4.732L12 5.006L12.265 4.732C12.787 4.186 13.414 3.751 14.108 3.453C14.802 3.155 15.55 3.001 16.305 3C17.825 3 19.278 3.624 20.345 4.732C21.41 5.843 22.003 7.323 22 8.862Z"
+                    stroke="#C5CBC9" stroke-width="1.5" stroke-linejoin="round"></path>
+            </svg>
+        </a>
+    </div>
+    </div>
+    <a href="{{ product.get_absolute_url }}">
+        <div class="products-list__item-img">
+            <img src="{{media_url}}{{ product.image }}" alt="{{ product.name }}">
+        </div>
+    </a>
+    <div class="products-list__item-descr">
+        <p>из {{ product.material_count }} {{ product.material_count|get_material_word }}</p>
+        <p>от <span>{{ product.price }} ₽</span></p>
+    </div>
+</div>
