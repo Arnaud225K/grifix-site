@@ -46,6 +46,7 @@ urlpatterns += [
     #Custom App url
     path('cart/', include('checkout.urls')),
     path('spec/', include('offers.urls')),
+    path('izbrannoe/', include('favorite.urls')),
     path('',include('menu.urls')),
 
     #Custom library url

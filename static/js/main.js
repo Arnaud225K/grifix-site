@@ -2761,15 +2761,15 @@
                         }),
                         document.addEventListener("click", function (e) {
                             n.contains(e.target) || r.contains(e.target) || n.classList.remove("show");
-                        }),
-                        document.querySelector(".header__block-favorites").setAttribute("data-before", "3");
-                    let l = document.querySelectorAll(".favorite");
-                    l.length > 0 &&
-                        l.forEach((e) => {
-                            e.addEventListener("click", function (t) {
-                                t.preventDefault(), e.classList.toggle("saved");
-                            });
-                        }),
+                        });
+                        // document.querySelector(".header__block-favorites").setAttribute("data-before", "3");
+                    // let l = document.querySelectorAll(".favorite");
+                    // l.length > 0 &&
+                    //     l.forEach((e) => {
+                    //         e.addEventListener("click", function (t) {
+                    //             t.preventDefault(), e.classList.toggle("saved");
+                    //         });
+                    //     }),
                         document.querySelectorAll(".copy").forEach((e) => {
                             e.addEventListener("click", function () {
                                 const t = e.previousElementSibling.innerText;

@@ -145,6 +145,91 @@ class IndexView(TemplateView):
     
 
 
+# class MenuView(View):
+
+#     def get(self, request, menu_slug):
+#         # Préférer le préchargement des régions
+#         current_menu = get_object_or_404(MenuCatalog.objects.prefetch_related('region','type_menu'), slug=menu_slug)
+#         current_filial = get_current_filial(request)
+
+#         # Vérifiez si la filiale actuelle est dans les régions du menu
+#         if current_menu.region.exists() and not current_menu.region.filter(id=current_filial.id).exists():
+#             raise Http404("This menu is not available for the current filial.")
+
+#         services_list = []
+#         if current_menu.slug == "uslugi":
+#             services_list = Services.objects.filter(is_hidden=False)
+
+#         # Initialisation des variables
+#         about_us_list = None
+#         zadachi_compania = []
+#         princip_raboty = []
+#         preimushestva = []
+#         review_list_all = []
+#         review_list = []
+
+#         #GET THE REVIEW
+#         review_data = cache.get(f'reviews_all_{current_filial.id}')
+#         if review_data is None:
+#             review_list_all = get_review(current_filial)[:SIZE_REVIEW_ALL_INDEX]
+#             cache.set(f'reviews_all_{current_filial.id}', review_list_all, timeout=60 * 15)
+#         else:
+#             review_list_all = review_data
+
+#         if current_menu.slug == "o-nas":
+#             about_us_data = cache.get(f'about_us_{current_menu.slug}')
+#             if about_us_data is None:
+#                 about_us_list = About_us.objects.filter(is_hidden=False).first()
+#                 if about_us_list:
+#                     zadachi_compania = about_us_list.rel_about_task.filter(is_hidden=False)[:SIZE_INDEX]
+#                     princip_raboty = about_us_list.rel_about_principle.filter(is_hidden=False)[:SIZE_INDEX]
+#                     preimushestva = about_us_list.rel_about_advantage.filter(is_hidden=False)[:SIZE_INDEX]
+#                 cache.set(f'about_us_{current_menu.slug}', (about_us_list, zadachi_compania, princip_raboty, preimushestva), timeout=60 * 15)
+#             else:
+#                 about_us_list, zadachi_compania, princip_raboty, preimushestva = about_us_data
+
+
+#             review_list = review_list_all[:SIZE_REVIEW_INDEX]
+
+#         # Fetch House lists based
+#         product_list = House.objects.filter(is_hidden=False).only('id', 'name', 'price')
+#         # material_count = product_list.count_unique_materials()
+
+
+
+
+#         #get
+#         material_filter = get_material_filter(product_list)
+#         floor_filter = get_floor_filter(product_list)
+
+
+#         context = {
+#             'current_menu': current_menu,
+#             'product_list':product_list,
+#             'about_us_list': about_us_list,
+#             'zadachi_compania': zadachi_compania,
+#             'princip_raboty': princip_raboty,
+#             'preimushestva': preimushestva,
+#             'review_list_all':review_list_all,
+#             'review_list': review_list,
+#             'services_list':services_list,
+#             'material_filter':material_filter,
+#             'floor_filter':floor_filter,
+#         }
+
+#         # Gestion de If-Modified-Since
+#         last_modified = request.META.get('HTTP_IF_MODIFIED_SINCE')
+#         if last_modified and current_menu.updated_at:
+#             if _if_modified_since(datetime2rfc(current_menu.updated_at), last_modified):
+#                 return HttpResponseNotModified()
+
+#         response = render(request, current_menu.type_menu.template, context)
+#         response['Last-Modified'] = datetime2rfc(current_menu.updated_at)
+        
+#         return response
+
+
+
 class MenuView(View):
 
     def get(self, request, menu_slug):
@@ -192,7 +277,9 @@ class MenuView(View):
             review_list = review_list_all[:SIZE_REVIEW_INDEX]
 
         # Fetch House lists based
-        product_list = House.objects.filter(is_hidden=False).annotate(material_count=Count('rel_house__material')).only('id', 'name', 'price')
+        product_list = House.objects.filter(is_hidden=False).only('id', 'name', 'price')
+        # material_count = product_list.count_unique_materials()
+
 
 
 
@@ -215,16 +302,18 @@ class MenuView(View):
             'floor_filter':floor_filter,
         }
 
-        # Gestion de If-Modified-Since
-        last_modified = request.META.get('HTTP_IF_MODIFIED_SINCE')
-        if last_modified and current_menu.updated_at:
-            if _if_modified_since(datetime2rfc(current_menu.updated_at), last_modified):
-                return HttpResponseNotModified()
+        return render(request, current_menu.type_menu.template, context)
 
-        response = render(request, current_menu.type_menu.template, context)
-        response['Last-Modified'] = datetime2rfc(current_menu.updated_at)
+        # Gestion de If-Modified-Since
+        # last_modified = request.META.get('HTTP_IF_MODIFIED_SINCE')
+        # if last_modified and current_menu.updated_at:
+        #     if _if_modified_since(datetime2rfc(current_menu.updated_at), last_modified):
+        #         return HttpResponseNotModified()
+
+        # response = render(request, current_menu.type_menu.template, context)
+        # response['Last-Modified'] = datetime2rfc(current_menu.updated_at)
         
-        return response
+        # return response
 
 # class MenuView(View):
 

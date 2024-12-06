@@ -179,7 +179,8 @@ class House(models.Model):
 			self.name += " {}".format(self.material.name)
 			name_tmp += "_{}".format(self.material.name)
 
-
+	def count_unique_materials(self):
+		return PriceHouse.objects.filter(house=self).values('material').distinct().count()
 
 class PriceHouse(models.Model):
 	house = models.ForeignKey(House, verbose_name="Дом", related_name="rel_house", blank=True, null=True, on_delete=models.CASCADE, db_index=True)

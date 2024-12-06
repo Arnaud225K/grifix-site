@@ -1,0 +1,6 @@
+{% load catalog_tags %}
+<div class="products-list">
+{% for product in product_list %}
+    {% include "includes/cards/catalog-card/catalog-card.html" %}
+{% endfor %}
+</div>

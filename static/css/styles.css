@@ -569,6 +569,9 @@ div.noUi-handle:before, div.noUi-handle:after {
   font-weight: 600;
 }
 
+.favorited {
+  color: #2AA87E; /* Ou toute autre propriété de style */
+}
 .favorite.saved svg {
   fill: #2AA87E;
 }

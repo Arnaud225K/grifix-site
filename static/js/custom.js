@@ -421,3 +421,585 @@ function closeOrderPopup() {
     document.body.classList.remove("no-scroll");
 }
 
+
+
+
+//:::::::::::::: FAVORITES SETUP AJAX :::::::::::::://
+
+// $(document).ready(function() {
+//     $('#add-to-favorites').on('click', function(e) {
+//         e.preventDefault(); // Empêcher le rechargement de la page
+
+//         const houseId = $(this).data('house-id'); // Récupérer l'ID de la maison
+        
+//         // Envoyer une requête AJAX pour ajouter aux favoris
+//         $.ajax({
+//             url: '/add_to_favorites/',
+//             type: 'POST',
+//             data: {
+//                 'house_id': houseId,
+//                 'csrfmiddlewaretoken': getCookie('csrftoken') // Ajouter le token CSRF
+//             },
+//             success: function(response) {
+//                 if (response.success) {
+//                     console.log('Maison ajoutée aux favoris !');
+//                     // loadFavorites(); // Charger les favoris après ajout
+//                 } else {
+//                     console.log('Erreur : ' + response.error);
+//                 }
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error('Error:', xhr.responseText);
+//                 console.log('Une erreur est survenue lors de l\'ajout aux favoris.');
+//             }
+//         });
+//     });
+
+    // Fonction pour charger et afficher les maisons favorites
+    // function loadFavorites() {
+    //     $.ajax({
+    //         url: "get_favorites/",
+    //         type: 'GET',
+    //         success: function(data) {
+    //             if (data.success) {
+    //                 $('#favorites-list').html(data.favorites_html); // Mettre à jour la liste des favoris avec le HTML retourné
+    //             }
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error('Error:', xhr.responseText);
+    //         }
+    //     });
+    // }
+
+    // // Initialiser le chargement des favoris au démarrage de la page
+    // loadFavorites();
+
+    // Fonction pour récupérer le cookie CSRF
+    // function getCookie(name) {
+    //     var cookieValue = null;
+    //     if (document.cookie && document.cookie !== '') {
+    //         var cookies = document.cookie.split(';');
+    //         for (var i =0; i < cookies.length; i++) {
+    //             var cookie = jQuery.trim(cookies[i]);
+    //             if (cookie.substring(0, name.length +1) === (name + '=')) {
+    //                 cookieValue = decodeURIComponent(cookie.substring(name.length +1));
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     return cookieValue;
+    // }
+
+    // Événement pour supprimer un favori
+    // $(document).on('click', '.remove-favorite', function(e) {
+    //     e.preventDefault();
+        
+    //     const houseId = $(this).data('house-id');
+        
+    //     let favorites = getFavoritesFromCookie();
+        
+    //     favorites = favorites.filter(id => id !== houseId); // Retirer l'ID de la maison des favoris
+    //     setFavoritesCookie(favorites); // Mettre à jour le cookie
+        
+    //     $(this).closest('.products-list__item').remove(); // Supprimer l'élément DOM correspondant
+    //     alert('Maison supprimée des favoris !');
+        
+    //     updateFavoritesCount(); // Mettre à jour le compteur si nécessaire
+    // });
+
+    // function setFavoritesCookie(favorites) {
+    //     document.cookie = "favorites=" + encodeURIComponent(JSON.stringify(favorites)) + "; path=/; max-age=31536000"; // Cookie valable pendant un an
+    // }
+// 
+
+
+
+// function toggleFavorite(houseId) {
+//     const action = document.querySelector(`#add-to-favorites[house-id="${houseId}"]`).classList.contains('favorited') ? 'remove' : 'add';
+
+//     $.ajax({
+//         url: '/manage_favorites/',
+//         type: 'POST',
+//         data: {
+//             house_id: houseId,
+//             action: action,
+//             csrfmiddlewaretoken: getCookie('csrftoken'), // Assurez-vous d'inclure le token CSRF
+//         },
+//         success: function(data) {
+//             if (data.success) {
+//                 if (action === 'add') {
+//                     document.querySelector(`#add-to-favorites[house-id="${houseId}"]`).classList.add('favorited');
+//                 } else {
+//                     document.querySelector(`#add-to-favorites[house-id="${houseId}"]`).classList.remove('favorited');
+//                 }
+//                 console.log(data.message);
+//             } else {
+//                 console.log(data.error);
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error:', xhr.responseText);
+//         }
+//     });
+// }
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     function toggleFavorite(houseId) {
+//         const favoriteLink = document.querySelector(`#add-to-favorites[house-id="${houseId}"]`);
+        
+//         // Vérifiez si l'élément existe avant d'accéder à classList
+//         if (!favoriteLink) {
+//             console.error(`Element not found for house ID: ${houseId}`);
+//             return;
+//         }
+
+//         const action = favoriteLink.classList.contains('favorited') ? 'remove' : 'add';
+
+//         $.ajax({
+//             url: "/manage-favorites/",
+//             type: 'POST',
+//             data: {
+//                 house_id: houseId,
+//                 action: action,
+//                 csrfmiddlewaretoken: getCookie('csrftoken'), // Assurez-vous d'inclure le token CSRF
+//             },
+//             success: function(data) {
+//                 if (data.success) {
+//                     if (action === 'add') {
+//                         favoriteLink.classList.add('favorited');
+//                     } else {
+//                         favoriteLink.classList.remove('favorited');
+//                     }
+//                     alert(data.message);
+//                 } else {
+//                     alert(data.error);
+//                 }
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error('Error:', xhr.responseText);
+//             }
+//         });
+//     }
+
+//     // Ajoutez un gestionnaire d'événements pour chaque bouton "В избранное"
+//     document.querySelectorAll('.favorite a#add-to-favorites').forEach(function(link) {
+//         link.addEventListener('click', function() {
+//             const houseId = this.getAttribute('house-id');
+//             toggleFavorite(houseId);
+//         });
+//     });
+// });
+
+// Assurez-vous que le code est exécuté après le chargement du DOM
+
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Définir la fonction toggleFavorite
+//     window.toggleFavorite = function(houseId) {
+//         console.log("House ID passed:", houseId); // Vérifiez que l'ID est correctement passé
+        
+//         if (!houseId) {
+//             console.error('House ID is undefined');
+//             return;
+//         }
+
+//         const favoriteLink = document.querySelector(`#add-to-favorites[house-id="${houseId}"]`);
+
+//         if (!favoriteLink) {
+//             console.error(`Element not found for house ID: ${houseId}`);
+//             return;
+//         }
+
+//         const action = favoriteLink.classList.contains('saved') ? 'remove' : 'add';
+
+//         $.ajax({
+//             url: '/manage_favorites/',
+//             type: 'POST',
+//             data: {
+//                 house_id: houseId,
+//                 action: action,
+//                 csrfmiddlewaretoken: getCookie('csrftoken'), // Assurez-vous d'inclure le token CSRF
+//             },
+//             success: function(data) {
+//                 if (data.success) {
+//                     if (action === 'add') {
+//                         favoriteLink.classList.add('saved');
+//                     } else {
+//                         favoriteLink.classList.remove('saved');
+//                     }
+//                     alert(data.message);
+//                 } else {
+//                     alert(data.error);
+//                 }
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error('Error:', xhr.responseText);
+//             }
+//         });
+//     };
+
+//     // Ajoutez un gestionnaire d'événements pour chaque bouton "В избранное"
+//     document.querySelectorAll('.favorite a#add-to-favorites').forEach(function(link) {
+//         link.addEventListener('click', function() {
+//             const houseId = this.getAttribute('house-id');
+//             toggleFavorite(houseId);
+//         });
+//     });
+// });
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     let favorites = document.querySelectorAll(".favorite");
+
+//     favorites.forEach((favorite) => {
+//         favorite.addEventListener("click", function (event) {
+//             event.preventDefault();
+
+//             const houseId = this.querySelector('a').getAttribute('house-id');
+//             const isSaved = this.classList.toggle("saved"); // Ajoute ou retire la classe "saved"
+
+
+//             if (!favorites) {
+//                 console.error(`Element not found for house ID: ${houseId}`);
+//                 return;
+//             } else {
+//                 console.log("House ID passed:", houseId); // Vérifiez que l'ID est correctement passé
+
+//             }
+
+
+//             // Déterminez l'action en fonction de l'état
+//             const action = isSaved ? 'add' : 'remove';
+
+//             // Envoi de la requête AJAX
+//             $.ajax({
+//                 url: '/manage_favorites/',
+//                 type: 'POST',
+//                 data: {
+//                     house_id: houseId,
+//                     action: action,
+//                     csrfmiddlewaretoken: getCookie('csrftoken'), // Inclure le token CSRF
+//                 },
+//                 success: function (data) {
+//                     if (data.success) {
+//                         console.log(data.message);
+//                     } else {
+//                         console.log(data.error);
+//                     }
+//                 },
+//                 error: function (xhr, status, error) {
+//                     console.error('Error:', xhr.responseText);
+//                 }
+//             });
+//         });
+//     });
+// });
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     let favorites = document.querySelectorAll(".favorite");
+
+//     favorites.forEach((favorite) => {
+//         favorite.addEventListener("click", function (event) {
+//             event.preventDefault();
+
+//             // Récupérer l'ID de la maison
+//             const houseId = this.querySelector('a').getAttribute('house-id');
+//             const isSaved = this.classList.toggle("saved"); // Ajoute ou retire la classe "saved"
+
+//             // Vérifiez si houseId est défini
+//             if (!houseId) {
+//                 console.error(`House ID not found.`);
+//                 return;
+//             } else {
+//                 console.log("House ID passed:", houseId); // Vérifiez que l'ID est correctement passé
+//             }
+
+//             // Déterminez l'action en fonction de l'état
+//             const action = isSaved ? 'add' : 'remove';
+
+//             // Envoi de la requête AJAX
+//             $.ajax({
+//                 url: '/manage_favorites/',
+//                 type: 'POST',
+//                 data: {
+//                     house_id: houseId,
+//                     action: action,
+//                     csrfmiddlewaretoken: getCookie('csrftoken'), // Inclure le token CSRF
+//                 },
+//                 success: function (data) {
+//                     if (data.success) {
+//                         console.log(data.message);
+//                     } else {
+//                         console.log(data.error);
+//                     }
+//                 },
+//                 error: function (xhr, status, error) {
+//                     console.error('Error:', xhr.responseText);
+//                 }
+//             });
+//         });
+//     });
+// });
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     let favorites = document.querySelectorAll(".favorite");
+    
+
+//     favorites.forEach((favorite) => {
+//         favorite.addEventListener("click", function (event) {
+//             event.preventDefault();
+
+//             // Récupérer l'ID de la maison
+//             const houseId = this.querySelector('a').getAttribute('house-id');
+//             const isSaved = this.classList.toggle("saved"); // Ajoute ou retire la classe "saved"
+
+//             // Vérifiez si houseId est défini
+//             if (!houseId) {
+//                 console.error(`House ID not found.`);
+//                 return;
+//             } else {
+//                 console.log("House ID passed:", houseId); // Vérifiez que l'ID est correctement passé
+//             }
+
+//             // Déterminez l'action en fonction de l'état
+//             const action = isSaved ? 'add' : 'remove';
+//             console.log("Action determined:", action); // Log de l'action déterminée
+
+//             // Envoi de la requête AJAX
+//             $.ajax({
+//                 url: '/manage_favorites/',
+//                 type: 'POST',
+//                 data: {
+//                     house_id: houseId,
+//                     action: action,
+//                     csrfmiddlewaretoken: getCookie('csrftoken'),
+//                 },
+//                 beforeSend: function() {
+//                     console.log("Sending AJAX request to /manage_favorites/ with data:", {
+//                         house_id: houseId,
+//                         action: action,
+//                     }); // Log avant l'envoi de la requête
+//                 },
+//                 success: function (data) {
+//                     console.log("Response from server:", data); // Log de la réponse du serveur
+//                     if (data.success) {
+//                         console.log(data.message);
+//                     } else {
+//                         console.log(data.error);
+//                     }
+//                 },
+//                 error: function (xhr, status, error) {
+//                     console.error('Error:', xhr.responseText); // Log d'erreur
+//                 }
+//             });
+//         });
+//     });
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     let favorites = document.querySelectorAll(".favorite");
+
+//     favorites.forEach((favorite) => {
+//         favorite.addEventListener("click", function (event) {
+//             event.preventDefault();
+
+//             // Récupérer l'ID de la maison
+//             const houseId = this.querySelector('a').getAttribute('house-id');
+//             const isSaved = this.classList.toggle("saved"); // Ajoute ou retire la classe "saved"
+
+//             // Vérifiez si houseId est défini
+//             if (!houseId) {
+//                 console.error(`House ID not found.`);
+//                 return;
+//             } else {
+//                 console.log("House ID passed:", houseId); // Vérifiez que l'ID est correctement passé
+//             }
+
+//             // Déterminez l'action en fonction de l'état
+//             const action = isSaved ? 'add' : 'remove';
+//             console.log("Action determined:", action); // Log de l'action déterminée
+
+//             // Récupérer l'URL depuis data-url
+//             var url = this.querySelector('a').getAttribute('data-url');
+//             console.log("URL to send:", url); // Log de l'URL
+
+//             // Créer un objet FormData
+//             const formData = new FormData();
+//             formData.append('house_id', houseId);
+//             formData.append('action', action);
+//             formData.append('csrfmiddlewaretoken', getCookie('csrftoken')); // Inclure le token CSRF
+
+//             // Envoi de la requête AJAX avec fetch
+//             fetch(url, {
+//                 method: 'POST',
+//                 body: formData,
+//                 headers: {
+//                     'X-CSRFToken': getCookie('csrftoken') // Inclure le token CSRF
+//                 }
+//             })
+//             .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error('Network response was not ok');
+//                 }
+//                 return response.json();
+//             })
+//             .then(data => {
+//                 console.log("Response from server:", data); // Log de la réponse du serveur
+//                 if (data.success) {
+//                     console.log(data.message);
+//                 } else {
+//                     console.log(data.error);
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//             });
+//         });
+//     });
+// });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    FavoriteButtons()
+    checkFavoriteStatus();
+});
+
+
+
+function FavoriteButtons() {
+    let favorites = document.querySelectorAll(".favorite");
+
+    favorites.forEach((favorite) => {
+        favorite.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Récupérer l'ID de la maison
+            const houseId = this.querySelector('a').getAttribute('house-id');
+            const isSaved = this.classList.toggle("saved"); // Ajoute ou retire la classe "saved"
+
+            // Vérifiez si houseId est défini
+            if (!houseId) {
+                console.error(`House ID not found.`);
+                return;
+            } else {
+                console.log("House ID passed:", houseId); // Vérifiez que l'ID est correctement passé
+            }
+
+            // Déterminez l'action en fonction de l'état
+            const action = isSaved ? 'add' : 'remove';
+            console.log("Action determined:", action); // Log de l'action déterminée
+
+            // Récupérer l'URL depuis data-url
+            var url = this.querySelector('a').getAttribute('data-url');
+            console.log("URL to send:", url); // Log de l'URL
+
+            // Créer un objet FormData
+            const formData = new FormData();
+            formData.append('house_id', houseId);
+            formData.append('action', action);
+            formData.append('csrfmiddlewaretoken', getCookie('csrftoken')); // Inclure le token CSRF
+
+            // Envoi de la requête AJAX avec fetch
+            fetch(url, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken') // Inclure le token CSRF
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Response from server:", data); // Log de la réponse du serveur
+                if (data.success) {
+                    // console.log(data.message);
+                    // updateFavoriteCount(); // Mettre à jour le compteur si nécessaire
+                    if (action === 'remove') {
+                        // Retirer l'élément de la liste des favoris du DOM et ajouter le nouveau contenu
+                        const productElement = document.getElementById(`product${houseId}`);
+                        if (productElement) {
+                            productElement.remove(); // Supprimer l'élément existant
+                        }
+    
+                        // // Ajouter le nouveau contenu du template partiel si nécessaire
+                        const productsList = document.querySelector('.products-list');
+                        productsList.insertAdjacentHTML('beforeend', data.favorites_list); // Ajouter le nouveau contenu
+                        // Mettre à jour la liste avec le contenu renvoyé par le serveur
+                        // const productsList = document.querySelector('.products-list');
+                        // productsList.innerHTML = data.favorites_list; // Remplacer par le nouveau contenu
+
+                        // // Si tous les favoris sont retirés, afficher un message vide
+                        // if (!data.is_favorite) {
+                        //     productsList.innerHTML += data.favorites_list;  // Ajoute le message vide si nécessaire
+                        // }
+                    }
+                    
+                    updateFavoriteCount(); // Mettre à jour le compteur si nécessaire
+                } else {
+                    console.log(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+}
+
+
+
+// Function to check the status of favorites on page load
+function checkFavoriteStatus() {
+    fetch('/izbrannoe/status_favorites/') // Replace with your FavoritesStatusView URL
+        .then(response => response.json())
+        .then(data => updateFavoriteStatus(data))
+        .catch(error => console.error('Error:', error));
+}
+
+// Function to update the favorite status based on server data
+function updateFavoriteStatus(data) {
+    updateFavoriteCount(); // Update the favorite count display
+
+    data.favorites.forEach(house => {
+        const favoriteLink = document.querySelector(`a[house-id="${house.id}"]`);
+        
+        if (favoriteLink) {
+            const favoriteDiv = favoriteLink.parentNode; // Access the parent div
+            favoriteDiv.classList.add('saved'); // Add 'saved' class if it's a favorite
+        }
+    });
+}
+
+
+// function updateFavoriteCount() {
+//     fetch('/izbrannoe/status_favorites/') // Remplacez par l'URL de votre vue FavoritesStatusView
+//         .then(response => response.json())
+//         .then(data => {
+//             document.querySelector(".header__block-favorites").setAttribute("data-before", data.count);
+//         })
+//         .catch(error => console.error('Error:', error));
+// }
+
+function updateFavoriteCount() {
+    fetch('/izbrannoe/status_favorites/') // Remplacez par l'URL de votre vue FavoritesStatusView
+        .then(response => response.json())
+        .then(data => {
+            // Vérifiez si le compteur est supérieur à zéro
+            if (data.count > 0) {
+                document.querySelector(".header__block-favorites").setAttribute("data-before", data.count);
+            } else {
+                // Si le compteur est zéro, vous pouvez soit ne rien faire, soit définir une valeur vide
+                document.querySelector(".header__block-favorites").setAttribute("data-before", ""); // Ou ne rien faire
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+

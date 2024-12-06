@@ -1,4 +1,6 @@
 {% load static %}
+{% load catalog_tags %}
+
 <div class="swiper-slide hits__slider-item">
     <a href="{{ product.get_absolute_url }}">
         <div class="hits__slider-title">
@@ -7,7 +9,7 @@
     </a>
     <div class="hits__slider-img"> <img src="{{media_url}}{{ product.image }}" alt="{{ product.name }}"></div>
     <div class="hits__slider-descr">
-        <div>из 5 материалов</div>
+        <div>из {{ product.count_unique_materials }} {{ product.count_unique_materials|get_material_word }}</div>
         <div>от<span> {{ product.price }} ₽</span></div>
     </div>
     <div class="slider__overlay"> <a class="slider__overlay-link" href="{{ product.get_absolute_url }}">Подробнее</a></div>

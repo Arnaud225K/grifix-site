@@ -6,11 +6,10 @@
             {% endif %}
             {% if search_text %}
                 <li>{{ search_text }}</li>
-			{% elif offers_item %}
-				<li><a href='/spec/'>Акции</a></li>
-				<li>{{ news_item.name }}</li>
 			{% elif offers_list %}
 				<li>Акции</li>
+			{% elif is_favorite_page %}
+				<li>Избранное</li>
             {% elif is_thank_you %}
                 <li>Спасибо за заказ</li>
             {% elif is_generic_error %}

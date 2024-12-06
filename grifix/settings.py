@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     'services',
     'import_image',
     'checkout',
+    'favorite',
 ]
 
 MIDDLEWARE = [
