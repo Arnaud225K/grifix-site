@@ -22,13 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 
 
 SITE_NAME = 'Grifix'
@@ -135,12 +136,28 @@ WSGI_APPLICATION = 'grifix.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': 'localhost',
+#         'USER': 'rasalas',
+#         'PASSWORD': 'tkPoWm9skRfTg225',
+#         'NAME': 'grifix',
+#         'PORT': '3306', 
+#         'CONN_MAX_AGE': 60 * 10,  # 10 minutes
+# 		'OPTIONS': {
+# 			'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+# 			'charset': 'utf8mb4',
+# 		}
+#     },
+# }
 
 
 # Password validation
@@ -168,7 +185,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'Asia/Yekaterinburg'
+# TIME_ZONE = 'Asia/Yekaterinburg'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -405,6 +423,12 @@ CKEDITOR_5_CONFIGS = {
 CKEDITOR_5_FILE_STORAGE = 'utils.utils.CkeditorCustomStorage'
 
 
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *
+
+
 #debug toolbar configuration 
 if DEBUG:
     INSTALLED_APPS += [
@@ -429,3 +453,9 @@ if DEBUG:
         'debug_toolbar.panels.profiling.ProfilingPanel',
     ]
     INTERNAL_IPS = ('127.0.0.1',)
+
+
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     from .prod_settings import *
