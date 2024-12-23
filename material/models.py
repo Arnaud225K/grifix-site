@@ -78,5 +78,11 @@ class AdditionalParam(models.Model):
 		verbose_name_plural = "Доп. параметры"
 		ordering = ["name"]
 	
+	def save(self, *args, **kwargs):
+		self.name = self.name.strip().capitalize()
+		# Generate the slug from the name
+		self.set_slug()
+		super().save(*args, **kwargs)
+
 	def set_slug(self):
 		self.slug = slugify(translit(self.name.replace('.', '-').replace(',', '-'), "ru", reversed=True))

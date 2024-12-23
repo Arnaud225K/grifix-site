@@ -32,7 +32,7 @@ admin.site.site_title = SITE_NAME
 
 
 urlpatterns = [
-    path('grifixadmin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]
 
 #Activate debug toolbar url
@@ -47,6 +47,8 @@ urlpatterns += [
     path('cart/', include('checkout.urls')),
     path('spec/', include('offers.urls')),
     path('izbrannoe/', include('favorite.urls')),
+    path('search/', include('search.urls')),
+    path('admin_m/', include('admin_m.urls')),
     path('',include('menu.urls')),
 
     #Custom library url

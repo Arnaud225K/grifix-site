@@ -2757,20 +2757,20 @@
                     const surfaceSelect = document.getElementById('surface-select').value;
                     const price = document.querySelector('.price__sum').textContent;
                     const house = document.querySelector('.house__name').getAttribute('data-house-name')
+                    const minPriceMin = document.querySelector('.min_price').textContent;
 
                     const materialSlug = materialSelect.value;
                     const materialName = materialSelect.options[materialSelect.selectedIndex].text;
 
-                    // Vérifier si les champs sont sélectionnés
-                    const selectedMaterialText = materialSlug ? materialName : "Не выбрано"; // Afficher "Не выбрано" si aucun matériau n'est sélectionné
-                    const selectedSurfaceText = surfaceSelect ? surfaceSelect : "Не выбрано"; // Afficher "Не выбрано" si aucune surface n'est sélectionnée
+                    const checkPrice = price.trim(); // Utilisez trim() pour éliminer les espaces
 
+
+                    // Vérifier si les champs sont sélectionnés
+                    const selectedMaterialText = materialSlug ? materialName : "Не выбрано";
+                    const selectedSurfaceText = surfaceSelect ? surfaceSelect : "Не выбрано";
+                    const priceDisplay = checkPrice === 'площадь дома не выбрана' ? minPriceMin : price;
                                 
                     // Update Popup content
-                    // // document.getElementById('popup-material').textContent = materialSlug;
-                    // document.getElementById('popup-material').textContent = selectedMaterialText;
-                    // document.getElementById('popup-surface').textContent = selectedSurfaceText; 
-                    // document.getElementById('popup-price').textContent = price; 
                     const materialSpan = document.getElementById('popup-material');
                     const surfaceSpan = document.getElementById('popup-surface');
                     const priceHouse = document.getElementById('popup-price')
@@ -2783,11 +2783,11 @@
 
                     materialSpan.textContent = selectedMaterialText; 
                     surfaceSpan.textContent = selectedSurfaceText; 
-                    priceHouse.textContent = price;
+                    priceHouse.textContent = priceDisplay;
                     
                     materialNameInput.value = selectedMaterialText;
                     surfaceHouseInput.value = selectedSurfaceText;
-                    priceHouseInput.value = price;
+                    priceHouseInput.value = priceDisplay;
                     NameHouseInput.value = house;
 
                     // Appliquer les classes de style en fonction des sélections

@@ -1,0 +1,12 @@
+{% load static %}
+{% load catalog_tags %}
+
+<main class="pool-page">
+    <div class="container">
+    <h1>{{ current_menu.name }}</h1>
+    <section class="pool__text">
+        <div class="pool-page__img"> <img src="{{media_url}}{{ current_menu.image }}" alt="{{ current_menu.name }}"></div>
+        {{ current_menu.description|my_safe:current_filial }}
+    </section>
+    </div>
+</main>

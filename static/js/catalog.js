@@ -1141,13 +1141,16 @@
         var r = W(t, Y(e), e);
         return (t.noUiSlider = r), r;
     };
+    const minPrice = parseFloat(document.getElementById('price-min-db').value.replace(/\s/g, '')) || 0; // Remove spaces for parsing
+    const maxPrice = parseFloat(document.getElementById('price-max-db').value.replace(/\s/g, '')) || 10000000; // Default max price
+    // console.log("Initializing price slider with min:", minPrice, "max:", maxPrice); // Debugging log
     document.querySelectorAll(".filters__price-range").forEach((t) => {
         $(t, {
-            start: [6e5, 106e5],
+            start: [minPrice, maxPrice],
             connect: !0,
-            range: { min: 6e5, max: 106e5 },
+            range: { min: minPrice, max: maxPrice },
             behaviour: "tap-drag",
-            step: 1e4,
+            step: 10000,
             format: {
                 to: function (t) {
                     return Math.round(t);
@@ -1240,25 +1243,25 @@
                 Z(t, Q(t));
             })(t);
         }),
-        document.querySelectorAll(".clear-filters").forEach((t) => {
-            t.addEventListener("click", function () {
-                !(function () {
-                    const t = document.getElementById("range"),
-                        e = document.querySelector(".filters__price-range");
-                    G.forEach((t) => {
-                        t.classList.remove("active");
-                    }),
-                        document.querySelectorAll('input[type="checkbox"]:checked').forEach((t) => {
-                            t.checked = !1;
-                        }),
-                        J.forEach((t) => {
-                            Z(t, "Не важно");
-                        }),
-                        t.noUiSlider.reset(),
-                        e.noUiSlider.reset();
-                })();
-            });
-        }),
+        // document.querySelectorAll(".clear-filters").forEach((t) => {
+        //     t.addEventListener("click", function () {
+        //         !(function () {
+        //             const t = document.getElementById("range"),
+        //                 e = document.querySelector(".filters__price-range");
+        //             G.forEach((t) => {
+        //                 t.classList.remove("active");
+        //             }),
+        //                 document.querySelectorAll('input[type="checkbox"]:checked').forEach((t) => {
+        //                     t.checked = !1;
+        //                 }),
+        //                 J.forEach((t) => {
+        //                     Z(t, "Не важно");
+        //                 }),
+        //                 t.noUiSxlider.reset(),
+        //                 e.noUiSlider.reset();
+        //         })();
+        //     });
+        // }),
         (function (t, e, r) {
             let n = document.querySelector(t),
                 i = document.querySelector(r),

@@ -7,7 +7,7 @@
                 <span>В избранное</span>
                 <div class="favorite">
                     <!--<a href="#" id="add-to-favorites" house-id="{{ house.id }}">-->
-                    <a href="#" id="add-to-favorites" house-id="{{ product.id }}" data-url="{% url 'favorite:manage_favorites' %}">
+                    <a href="#" id="add-to-favorites" house-slug="{{ product.slug }}" data-url="{% url 'favorite:manage_favorites' %}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M22 8.862C22.0034 10.4007 21.4106 11.881 20.346 12.992C17.905 15.523 15.537 18.162 13.006 20.6C12.425 21.15 11.504 21.13 10.949 20.555L3.654 12.993C1.449 10.707 1.449 7.017 3.654 4.732C4.175 4.185 4.802 3.749 5.496 3.452C6.191 3.154 6.938 3.001 7.694 3.001C8.45 3.001 9.197 3.154 9.892 3.452C10.586 3.749 11.213 4.185 11.734 4.732L12 5.006L12.265 4.732C12.787 4.186 13.414 3.751 14.108 3.453C14.802 3.155 15.55 3.001 16.305 3C17.825 3 19.278 3.624 20.345 4.732C21.41 5.843 22.003 7.323 22 8.862Z"
@@ -18,27 +18,94 @@
             </div>
         </div>
         <section class="house">
-            <div class="house__images">
-                <div class="house__images-main"> <img src="{% static 'img/images/photo-product.webp' %}" alt=""></div>
-                <div class="house__images-list">
-                    <div class="thumb"><img src="{% static 'img/images/blueprint1.webp' %}" alt=""></div>
-                    <div class="thumb"> <img src="{% static 'img/images/blueprint2.webp' %}" alt=""></div>
-                    <div class="thumb overlay" data-before="+5 фото"><img src="{% static 'img/images/blueprint1.webp' %}" alt=""></div>
-                    <div class="thumb hidden" data-before="+5 фото"><img src="{% static 'img/images/blueprint1.webp' %}" alt=""></div>
-                </div>
+        <div class="house__images">
+            <div class="house__images-main">
+                {% if product.image %}
+                    <img src="{{ media_url }}{{ product.image }}" alt="{{ product.name }}">
+                {% endif %}
             </div>
+            <div class="house__images-list">
+                {% if product.image %}
+                    <div class="thumb"><img src="{{ media_url }}{{ product.image }}" alt="{{ product.name }} 1"></div>
+                {% endif %}
+                {% if product.image_2 %}
+                    <div class="thumb"><img src="{{ media_url }}{{ product.image_2 }}" alt="{{ product.name }} 2"></div>
+                {% endif %}
+                <div class="thumb overlay" data-before="+{{ additional_images_count }} фото">
+                    {% if product.image_3 %}
+                        <img src="{{ media_url }}{{ product.image_3 }}" alt="{{ product.name }} overlay">
+                    {% else %}
+                        <img src="" alt="Image non disponible" style="display:none;"> <!-- Optionnel : image cachée si aucune image -->
+                    {% endif %}
+                </div>
+                {% if product.image_3 %}
+                    <div class="thumb hidden" data-img-url="{{ media_url }}{{ product.image_3 }}">
+                        <img src="{{ media_url }}{{ product.image_3 }}" alt="{{ product.name }} 3">
+                    </div>
+                {% endif %}
+                {% if product.image_4 %}
+                    <div class="thumb hidden" data-img-url="{{ media_url }}{{ product.image_4 }}">
+                        <img src="{{ media_url }}{{ product.image_4 }}" alt="{{ product.name }} 4">
+                    </div>
+                {% endif %}
+                {% if product.image_5 %}
+                    <div class="thumb hidden" data-img-url="{{ media_url }}{{ product.image_5 }}">
+                        <img src="{{ media_url }}{{ product.image_5 }}" alt="{{ product.name }} 5">
+                    </div>
+                {% endif %}
+                {% if product.image_6 %}
+                    <div class="thumb hidden" data-img-url="{{ media_url }}{{ product.image_6 }}">
+                        <img src="{{ media_url }}{{ product.image_6 }}" alt="{{ product.name }} 6">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
             <div class="slider__container">
                 <div class="swiper house__slider">
                     <div class="swiper-wrapper house__slider-wrapper">
-                        <div class="swiper-slide house__slide">
-                            <div class="house__slide-img"> <img src="{% static 'img/images/photo-product.webp' %}" alt=""></div>
-                        </div>
-                        <div class="swiper-slide house__slide">
+                        {% if product.image %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image }}" alt="{{ product.name }}"></div>
+                            </div>                        
+                        {% endif %}
+
+                        {% if product.image_1 %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image_1 }}" alt="{{ product.name }} 1"></div>
+                            </div>                        
+                        {% endif %}
+                        {% if product.image_2 %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image_2 }}" alt="{{ product.name }} 2"></div>
+                            </div>                        
+                        {% endif %}
+                        {% if product.image_3 %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image_3 }}" alt="{{ product.name }} 3"></div>
+                            </div>                        
+                        {% endif %}
+                        {% if product.image_4 %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image_4 }}" alt="{{ product.name }} 4"></div>
+                            </div>                        
+                        {% endif %}
+                        {% if product.image_5 %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image_5 }}" alt="{{ product.name }} 5"></div>
+                            </div>                        
+                        {% endif %}
+                        {% if product.image_6 %}
+                            <div class="swiper-slide house__slide">
+                                <div class="house__slide-img"> <img src="{{ media_url }}{{ product.image_6 }}" alt="{{ product.name }} 6"></div>
+                            </div>                        
+                        {% endif %}
+                        <!--<div class="swiper-slide house__slide">
                             <div class="house__slide-img"> <img src="{% static 'img/images/blueprint1.webp' %}" alt=""></div>
                         </div>
                         <div class="swiper-slide house__slide">
                             <div class="house__slide-img"> <img src="{% static 'img/images/blueprint2.webp' %}" alt=""></div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="swiper-pagination house__slider-pagination"></div>

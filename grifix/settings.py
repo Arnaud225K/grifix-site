@@ -48,6 +48,9 @@ DATABASE_HOST = 'localhost'
 #contact session key for utm setup
 CONTACTS_SESSION_KEY = 'contacts_clid'
 
+# SESSION_COOKIE_AGE = 60 * 60 * 24 * 180 # 6 Months 
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30  # 30 Days
+
 
 # Settings Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -89,6 +92,8 @@ INSTALLED_APPS = [
     'import_image',
     'checkout',
     'favorite',
+    'search',
+    'admin_m',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +123,7 @@ TEMPLATES = [
                 PROJECT_NAME + ".views.global_views",
                 'utils.breadcrumbs.breadcrumbs',
                 'static_text.views.static_text',
-                # 'admin_m.views.static_admin_url',
+                'admin_m.views.static_admin_url',
             ],
         },
     },

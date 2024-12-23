@@ -1,4 +1,6 @@
 {% load static %}
+{% load catalog_tags %}
+
 <!-- FOOTER     -->
 <footer class="footer">
     <div class="container">
@@ -7,9 +9,9 @@
         <div class="footer__logo"> <a href="/"> <img src="{% static 'icons/logo.svg' %}" alt="logo"></a></div>
         <div class="footer__contacts">
             <p class="footer__block-caption">Адрес офиса:</p>
-            <p>г.Москва, ул.Москва, 00</p>
-            <p>Тел.: <a href="tel:74955555555">+7(495)-ххх-хх-хх</a></p>
-            <p>E-mail: <a href="mailto:grifix@grifix.ru">grifix@grifix.ru</a></p>
+            <p>{{ current_filial.address }}</p>
+            <p>Тел.: <a href="tel:{{ current_filial.phone|remove_space_href}}">{{ current_filial.phone }}</a></p>
+            <p>E-mail: <a href="mailto:{{ current_filial.email }}">{{ current_filial.email }}</a></p>
         </div>
         <div class="footer__social mobile">
             <p class="footer__block-caption">Мы в соцсетях
@@ -25,10 +27,14 @@
         </div>
         </div>
         <div class="footer__navigation">
-        <p class="footer__block-caption">Навигация по сайту:</p><a href="/catalog.html">Каталог</a><a
-            href="/services.html">Услуги</a><a href="/offers.html">Акции</a><a href="/reviews.html">Отзывы</a><a
-            href="/about.html">О нас</a><a href="/contacts.html">Контакты</a><a href="/policy.html">Политика
-            конфиденциальности</a>
+        <p class="footer__block-caption">Навигация по сайту:</p>
+            <a href="/katalog-domov/">Каталог</a>
+            <a href="/uslugi/">Услуги</a>
+            <a href="/spec/">Акции</a>
+            <a href="/otzyvy/">Отзывы</a>
+            <a href="/o-nas/">О нас</a>
+            <a href="/contacts/">Контакты</a>
+            <a href="/policy/">Политика конфиденциальности</a>
         </div>
         <div class="footer__social">
         <p class="footer__block-caption">Мы в соцсетях
@@ -45,7 +51,7 @@
     <div class="footer__copyright">
         <div class="footer__copyright-icon"> <img src="{% static 'icons/copyright.svg' %}" alt="all rights reserved"></div>
         <div class="footer__copyright-text">
-        <p>ГРИФИКС, 2024</p>
+        <p>ГРИФИКС, {{current_year}}</p>
         </div>
     </div>
     </div>

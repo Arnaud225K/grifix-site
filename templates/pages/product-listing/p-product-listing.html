@@ -1,225 +1,12 @@
 {% load static %}    
 <main class="catalog-page"><!-- MOBILE FILTERS SECTION-->
-    <section class="filters-mobile">
-        <div class="filters-mobile__close">
-            <svg width="26" height="26" viewBox="0 0 36 36" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 4L22 22M4 22L22 4" stroke="#C5CBC9" stroke-width="2.25" stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-            </svg>
-        </div>
-        <div class="filters__wrapper filters__wrapper-characteristics">
-            <div class="filters__characteristics">
-                <div class="filters__caption">Материал дома</div>
-                <div class="filters__characteristics-options">
-                    <div>Все</div>
-                    <div>Кирпич</div>
-                    <div>Каркас</div>
-                    <div>Брус</div>
-                    <div>Газоблок</div>
-                    <div>Пеноблок</div>
-                </div>
-            </div>
-            <div class="filters__dropdowns">
-            <div class="filters__dropdowns-item">
-                <div class="filters__caption">Этажность</div>
-                <div class="dropdown__block"><span>Не важно</span>
-                <div class="dropdown__arrow"></div>
-                <div class="dropdown__block-content"> <label><input type="checkbox" name="" value="1">
-                    <div class="custom-icon"></div><span>1</span>
-                    </label><label><input type="checkbox" name="" value="2">
-                    <div class="custom-icon"></div><span>2</span>
-                    </label><label><input type="checkbox" name="" value="3">
-                    <div class="custom-icon"></div><span>3</span>
-                    </label></div>
-                </div>
-            </div>
-            <div class="filters__dropdowns-item">
-                <div class="filters__caption">Число спален</div>
-                <div class="dropdown__block"><span>Не важно</span>
-                <div class="dropdown__arrow"></div>
-                <div class="dropdown__block-content"> <label><input type="checkbox" name="" value="1">
-                    <div class="custom-icon"></div><span>1</span>
-                    </label><label><input type="checkbox" name="" value="2">
-                    <div class="custom-icon"></div><span>2</span>
-                    </label><label><input type="checkbox" name="" value="3">
-                    <div class="custom-icon"></div><span>3</span>
-                    </label></div>
-                </div>
-            </div>
-            <div class="filters__dropdowns-item">
-                <div class="filters__caption">Число санузлов</div>
-                <div class="dropdown__block"><span>Не важно</span>
-                <div class="dropdown__arrow"></div>
-                <div class="dropdown__block-content"><label><input type="checkbox" name="" value="1">
-                    <div class="custom-icon"></div><span>1</span>
-                    </label><label><input type="checkbox" name="" value="2">
-                    <div class="custom-icon"></div><span>2</span>
-                    </label><label><input type="checkbox" name="" value="3">
-                    <div class="custom-icon"></div><span>3</span>
-                    </label></div>
-                </div>
-            </div>
-            <div class="filters__dropdowns-item">
-                <div class="filters__caption">Дополнительные параметры</div>
-                <div class="dropdown__block"><span>Выбрать</span>
-                <div class="dropdown__arrow"></div>
-                <div class="dropdown__block-content"><label><input type="checkbox" name="">
-                    <div class="custom-icon"></div><span>Все</span>
-                    </label><label><input type="checkbox" name="">
-                    <div class="custom-icon"></div><span>Кухня-гостиная</span>
-                    </label><label><input type="checkbox" name="">
-                    <div class="custom-icon"></div><span>Мастер-спальня</span>
-                    </label><label><input type="checkbox" name="">
-                    <div class="custom-icon"></div><span>Кладовая</span>
-                    </label><label><input type="checkbox" name="">
-                    <div class="custom-icon"></div><span>Хозблок</span>
-                    </label><label><input type="checkbox" name="">
-                    <div class="custom-icon"></div><span>Котельная</span>
-                    </label></div>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="filters__wrapper filters__wrapper-price">
-            <div class="filters__price">
-            <div class="filters__caption">Цена, ₽</div>
-            <div class="filters__price-group"> <input class="price-min" type="number" placeholder="От"><input
-                class="price-max" type="number" placeholder="До"></div>
-            </div>
-            <div class="filters__price-range"></div>
-        </div>
-        <div class="filters__btn-group">
-            <button id="show-products"> 
-                <span>Показать</span>
-                <div class="img">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="white" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </div>
-            </button>
-            <button class="clear-filters"> 
-                <span>Сбросить</span>
-                <div class="img"> 
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4L22 22M4 22L22 4" stroke="#2D896A" stroke-width="2.25" stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                    </svg>
-                </div>
-            </button>
-        </div>
-    </section>
+
+    {% include "includes/mobile-catalog-filter/mobile-catalog-filter.html" %}
+    <!--</form>-->
     <div class="container">
         <h1>Каталог домов</h1><!-- FILTERS SECTION-->
-        <section class="filters">
-            <div class="filters__wrapper filters__wrapper-characteristics">
-                <div class="filters__characteristics">
-                    <div class="filters__caption">Материал дома</div>
-                    <div class="filters__characteristics-options">
-                    {% if material_filter %}
-                        <div class="filter-button" data-name="material" data-value="">Все</div>
-                        {% for material in material_filter %}
-                            <div class="filter-button" data-name="material" data-value="{{ material.slug }}">{{ material.name }}</div>
-                        {% endfor %}
-                    {% endif %}
-                    </div>
-                </div>
-                <div class="filters__dropdowns">
-                    <div class="filters__dropdowns-item">
-                    <div class="filters__caption">Этажность</div>
-                    <div class="dropdown__block"><span>Не важно</span>
-                        <div class="dropdown__arrow"></div>
-                        <div class="dropdown__block-content"> <label><input type="checkbox" name="" value="1">
-                            <div class="custom-icon"></div><span>1</span>
-                        </label><label><input type="checkbox" name="" value="2">
-                            <div class="custom-icon"></div><span>2</span>
-                        </label><label><input type="checkbox" name="" value="3">
-                            <div class="custom-icon"></div><span>3</span>
-                        </label></div>
-                    </div>
-                    </div>
-                    <div class="filters__dropdowns-item">
-                    <div class="filters__caption">Число спален</div>
-                    <div class="dropdown__block"><span>Не важно</span>
-                        <div class="dropdown__arrow"></div>
-                        <div class="dropdown__block-content"> <label><input type="checkbox" name="" value="1">
-                            <div class="custom-icon"></div><span>1</span>
-                        </label><label><input type="checkbox" name="" value="2">
-                            <div class="custom-icon"></div><span>2</span>
-                        </label><label><input type="checkbox" name="" value="3">
-                            <div class="custom-icon"></div><span>3</span>
-                        </label></div>
-                    </div>
-                    </div>
-                    <div class="filters__dropdowns-item">
-                    <div class="filters__caption">Число санузлов</div>
-                    <div class="dropdown__block"><span>Не важно</span>
-                        <div class="dropdown__arrow"></div>
-                        <div class="dropdown__block-content"><label><input type="checkbox" name="" value="1">
-                            <div class="custom-icon"></div><span>1</span>
-                        </label><label><input type="checkbox" name="" value="2">
-                            <div class="custom-icon"></div><span>2</span>
-                        </label><label><input type="checkbox" name="" value="3">
-                            <div class="custom-icon"></div><span>3</span>
-                        </label></div>
-                    </div>
-                    </div>
-                    <div class="filters__dropdowns-item">
-                    <div class="filters__caption">Дополнительные параметры</div>
-                    <div class="dropdown__block"><span>Выбрать</span>
-                        <div class="dropdown__arrow"></div>
-                        <div class="dropdown__block-content"><label><input type="checkbox" name="">
-                            <div class="custom-icon"></div><span>Все</span>
-                        </label><label><input type="checkbox" name="">
-                            <div class="custom-icon"></div><span>Кухня-гостиная</span>
-                        </label><label><input type="checkbox" name="">
-                            <div class="custom-icon"></div><span>Мастер-спальня</span>
-                        </label><label><input type="checkbox" name="">
-                            <div class="custom-icon"></div><span>Кладовая</span>
-                        </label><label><input type="checkbox" name="">
-                            <div class="custom-icon"></div><span>Хозблок</span>
-                        </label><label><input type="checkbox" name="">
-                            <div class="custom-icon"></div><span>Котельная</span>
-                        </label></div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filters__wrapper filters__wrapper-price">
-                <div class="filters__price">
-                    <div class="filters__caption">Цена, ₽</div>
-                    <div class="filters__price-group"> 
-                        <input type="number" placeholder="От" id="price-min">
-                        <input type="number" placeholder="До" id="price-max">
-                    </div>
-                </div>
-                <div class="filters__price-range" id="range"></div>
-            </div>
-            <div class="filters__btn-group">
-                <button id="show-products"> 
-                    <span>Показать</span>
-                    <div class="img">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="white" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                </button>
-                <button class="clear-filters" id="clear-filters"> 
-                    <span>Сбросить </span>
-                    <div class="img"> 
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 4L22 22M4 22L22 4" stroke="#2D896A" stroke-width="2.25" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                </button>
-            </div>
-        </section><!-- PRODUCTS LISTING-->
+        {% include "includes/catalog-filter/catalog-filter.html" %}
+        <!-- PRODUCTS LISTING-->
         <section class="products">
             <div class="products__filter-sort">
                 <div class="filt-btn"> 
@@ -228,25 +15,41 @@
                 </div>
                 <div class="sort-btn"> 
                     <span>Сортировка по цене</span>
-                    <div class="sort-img"><img src="{% static 'icons/icon-sort.svg' %}" alt=""></div>
+                    <!--<div class="sort-img"><img src="{% static 'icons/icon-sort.svg' %}" alt=""></div>-->
+                    <div class="sort-img" data-sort-type="2">
+                    <input type="hidden" name="sort_type" value="5">
+                        <img src="{% static 'icons/icon-sort.svg' %}" alt="">
+                    </div>
                 </div>
             </div>
             <div class="products-list">
-                {% if product_list %}
-                    {% for product in product_list %}
-                        {% include "includes/cards/catalog-card/catalog-card.html" %}
-                    {% endfor %}
-                {% endif %}
-                
+                {% for product in product_list %}
+                    {% include "includes/cards/catalog-card/catalog-card.html" %}
+                {% empty %}
+                <div class="products-list__item" id="product-id">
+                    <div class="products-list__item-caption">
+                    <p>Не было найдено ни одного дома</p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="products-showmore"> <button id="show-more-houses"> <span>Показать еще</span>
-                <div class="img"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg></div>
-            </button></div>
+            <div class="products-showmore"> 
+                <button id="show-more-houses" style="display: {% if has_next %} flex {% else %} none {% endif %}" data-page="{{ current_page }}"> 
+                <span>Показать еще</span>
+                    <div class="img">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="#194335" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                </button>
+            </div>
         </section><!-- FORM SECTION-->
         {% include "includes/s-all/s-all-feedback/s-all-feedback.html" %}
     </div>
+    <!-- Use a script tag to hold selected filters as JSON -->
+    <script id="selected-filters" class="selected-filters" type="application/json">
+        {{ selected_filters|safe }}
+    </script>
 </main>

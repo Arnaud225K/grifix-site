@@ -31,8 +31,10 @@
             {% include "pages/cooperation/p-cooperation.html" %}
         {% elif current_menu.slug == 'otzyvy' %}
             {% include "pages/reviews/p-review.html" %}
+        {% elif current_menu.slug == 'pool' %}
+            {% include "pages/pool/p-pool.html" %}
         {% elif current_menu.slug == 'policy' %}
-        <h1>Page policy </h1>
+            {% include "pages/policy/p-policy.html" %}
         {% elif current_menu.slug == 'cookies' %}
         <h1>Page cookies </h1>
         {% else %}
@@ -41,6 +43,6 @@
     </div>
 {% endblock %}
 {% block script %}
-<script src="{% static 'js/about.js' %}" defer="defer"></script>
+    <script src="{% static 'js/about.js' %}" defer="defer"></script>
 {% endblock script %}
 

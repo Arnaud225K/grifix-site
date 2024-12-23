@@ -111,12 +111,18 @@ class House(models.Model):
 	catalog = models.ForeignKey(MenuCatalog, verbose_name="Каталог", related_name='house_catalog_set', on_delete=models.CASCADE, db_index=True)
 
 	floor = models.ForeignKey(Floor, verbose_name="Этажность", related_name="rel_floor", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
-	bedrom = models.ForeignKey(Bedroom, verbose_name="Число спален", related_name="rel_bedrom", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
-	bathrom = models.ForeignKey(Bathroom, verbose_name="Число санузлов", related_name="rel_bathrom", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
+	bedroom = models.ForeignKey(Bedroom, verbose_name="Число спален", related_name="rel_bedroom", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
+	bathroom = models.ForeignKey(Bathroom, verbose_name="Число санузлов", related_name="rel_bathroom", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
 	dop_param = models.ManyToManyField(AdditionalParam, verbose_name="Доп. параметры", db_table='dop_param', related_name='dop_param_id', symmetrical=False, blank=True, db_index=True)
 
-	price = models.CharField(max_length=128, verbose_name="Базовая цена", blank=True, null=True)
+	price = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name="Базовая цена", blank=True, null=True)
+	
 	image = models.CharField(max_length=256, verbose_name="Картинка основная", blank=True, null=True)
+	image_2 = models.CharField(max_length=256, verbose_name="Картинка 2", blank=True, null=True)
+	image_3 = models.CharField(max_length=256, verbose_name="Картинка 3", blank=True, null=True)
+	image_4 = models.CharField(max_length=256, verbose_name="Картинка 4", blank=True, null=True)
+	image_5 = models.CharField(max_length=256, verbose_name="Картинка 5", blank=True, null=True)
+	image_6 = models.CharField(max_length=256, verbose_name="Картинка 6", blank=True, null=True)
 
 	description = CKEditor5Field(verbose_name="Описание", blank=True, null=True)
 	title_main = models.CharField(max_length=512, verbose_name="Заголовок страницы", blank=True, null=True)
@@ -135,6 +141,11 @@ class House(models.Model):
 		ordering = ["catalog"]
 		verbose_name_plural = "Дома"
 
+	def formatted_price(self):
+		if self.price is not None:
+			return f"{self.price:,.0f}".replace(",", " ")
+		return "0"
+
 	def get_absolute_url(self):
 		return '/product/{}/'.format(self.slug)
 	
@@ -143,53 +154,51 @@ class House(models.Model):
 	
 	def set_slug(self):
 		name_tmp = self.name
-		if self.param_1:
-			self.name += " {}".format(self.param_1)
-			name_tmp += "_{}".format(self.param_1)
-			self.param_1_slug = slugify(translit(self.param_1.replace('.', '-').replace(',', '-'), "ru", reversed=True))
-		if self.param_2:
-			self.name += " {}".format(self.param_2)
-			name_tmp += "_{}".format(self.param_2)
-			self.param_2_slug = slugify(translit(self.param_2.replace('.', '-').replace(',', '-'), "ru", reversed=True))
-		if self.param_3:
-			self.name += " {}".format(self.param_3)
-			name_tmp += "_{}".format(self.param_3)
-			self.param_3_slug = slugify(translit(self.param_3.replace('.', '-').replace(',', '-'), "ru", reversed=True))
-		if self.material:
-			self.name += " {}".format(self.material.name)
-			name_tmp += "_{}".format(self.material.name)
+		if self.floor:
+			self.name += " {}".format(self.floor.number)
+			name_tmp += "_{}".format(self.floor.number)
+		if self.bedroom:
+			self.name += " {}".format(self.bedroom.number)
+			name_tmp += "_{}".format(self.bedroom.number)
+		if self.bathroom:
+			self.name += " {}".format(self.bathroom.number)
+			name_tmp += "_{}".format(self.bathroom.number)
 		
 		self.slug = slugify(translit(name_tmp.replace('.', '-').replace(',', '-'), "ru", reversed=True))
 
 	def set_name(self):
 		name_tmp = self.name
-		if self.param_1:
-			self.name += " {}".format(self.param_1)
-			name_tmp += "_{}".format(self.param_1)
-			self.param_1_slug = slugify(translit(self.param_1.replace('.', '-').replace(',', '-'), "ru", reversed=True))
-		if self.param_2:
-			self.name += " {}".format(self.param_2)
-			name_tmp += "_{}".format(self.param_2)
-			self.param_2_slug = slugify(translit(self.param_2.replace('.', '-').replace(',', '-'), "ru", reversed=True))
-		if self.param_3:
-			self.name += " {}".format(self.param_3)
-			name_tmp += "_{}".format(self.param_3)
-			self.param_3_slug = slugify(translit(self.param_3.replace('.', '-').replace(',', '-'), "ru", reversed=True))
-		if self.material:
-			self.name += " {}".format(self.material.name)
-			name_tmp += "_{}".format(self.material.name)
+		if self.floor:
+			self.name += "Э {}".format(self.floor.number)
+			name_tmp += "_{}".format(self.floor.number)
+		if self.bedroom:
+			self.name += "Сп {}".format(self.bedroom.number)
+			name_tmp += "_{}".format(self.bedroom.number)
+		if self.bathroom:
+			self.name += "Са {}".format(self.bathroom.number)
+			name_tmp += "_{}".format(self.bathroom.number)
 
 	def count_unique_materials(self):
 		return PriceHouse.objects.filter(house=self).values('material').distinct().count()
+
+	def count_images(self):
+		"""Compter le nombre d'images non nulles à partir de image_4."""
+		images = [self.image_3 ,self.image_4, self.image_5, self.image_6]
+		return sum(1 for img in images if img)  # Compter les images non nulles
 
 class PriceHouse(models.Model):
 	house = models.ForeignKey(House, verbose_name="Дом", related_name="rel_house", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
 	material = models.ForeignKey(Material, verbose_name="Материал", related_name="rel_material_price", blank=True, null=True, on_delete=models.CASCADE, db_index=True)
 	surface = models.PositiveIntegerField(verbose_name="Площадь дома")
-	price = models.CharField(max_length=128, verbose_name="Цена/Материал", blank=True, null=True)
-	
+	price = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name="Цена/Материал", blank=True, null=True)
+
 	def __str__(self):
 		return f"{self.house.name} - {self.material.name}" 
-	
+
 	class Meta:
 		verbose_name_plural = "Цена/Материал"
+
+	def formatted_price(self):
+		if self.price is not None:
+			return f"{self.price:,.0f}".replace(",", " ")
+		return "0"

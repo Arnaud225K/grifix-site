@@ -1,0 +1,11 @@
+{% load static %}
+{% load catalog_tags %}
+
+<main class="policy-page">
+    <div class="container">
+    <h1>{{ current_menu.name }}</h1>
+    <section class="policy__text">
+        {{ current_menu.description|my_safe:current_filial }}
+    </section>
+    </div>
+</main>

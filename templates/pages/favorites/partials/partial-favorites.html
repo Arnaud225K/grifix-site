@@ -1,6 +1,11 @@
-{% load catalog_tags %}
-<div class="products-list">
+<div class="products-list products-list-favorite">
 {% for product in product_list %}
-    {% include "includes/cards/catalog-card/catalog-card.html" %}
+    {% include "includes/cards/catalog-card/partial/catalog-card-partial.html" %}
+{% empty %}
+    <div class="products-list__item" id="product-id">
+    <div class="products-list__item-caption">
+        <p>Нет дома в избранном</p>
+    </div>
+    </div>
 {% endfor %}
 </div>

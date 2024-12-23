@@ -1,36 +1,38 @@
 (() => {
-    const e = document.querySelectorAll(".reviews__item-video video"),
-        t = document.querySelectorAll(".reviews__item-overlay button"),
-        n = document.querySelectorAll(".reviews__item-video .control");
-    t.forEach((o, l) => {
-        const i = e[l],
-            r = n[l];
-        o.addEventListener("click", () =>
-            (function (o, l, i) {
-                var r, s, c;
-                o.paused
-                    ? ((c = o),
-                      e.forEach((e) => {
-                          e !== c && e.pause();
-                      }),
-                      (r = l),
-                      (s = i),
-                      t.forEach((e) => {
-                          e !== r && (e.textContent = "Посмотреть");
-                      }),
-                      n.forEach((e) => {
-                          e !== s && (e.style.display = "flex");
-                      }),
-                      o.play(),
-                      (l.textContent = "Пауза"),
-                      (i.style.display = "none"))
-                    : (o.pause(), (l.textContent = "Посмотреть"), (i.style.display = "flex"));
-            })(i, o, r)
-        ),
-            i.addEventListener("ended", () =>
-                (function (e, t, n) {
-                    (t.textContent = "Посмотреть"), (n.style.display = "flex");
-                })(0, o, r)
-            );
-    });
+    const e = document.querySelector(".popup__overlay.video-popup__overlay"),
+        o = document.querySelector(".popup.video"),
+        r = o.querySelector("iframe"),
+        s = document.querySelector(".popup__close.video-popup__close"),
+        c = document.querySelectorAll(".reviews__item-overlay button"),
+        t = document.querySelectorAll(".reviews__item-overlay");
+    function l() {
+        (r.src = ""),
+            e.classList.remove("show"),
+            o.classList.remove("show"),
+            c.forEach((e) => {
+                e.style.display = "block";
+            }),
+            t.forEach((e) => {
+                e.style.display = "flex";
+            });
+    }
+    c.forEach((s) => {
+        s.addEventListener("click", () => {
+            var l;
+            (l = s.closest(".reviews__item").querySelector("iframe").src),
+                (r.src = l),
+                e.classList.add("show"),
+                o.classList.add("show"),
+                c.forEach((e) => {
+                    e.style.display = "none";
+                }),
+                t.forEach((e) => {
+                    e.style.display = "none";
+                });
+        });
+    }),
+        s.addEventListener("click", l),
+        e.addEventListener("click", (o) => {
+            o.target === e && l();
+        });
 })();

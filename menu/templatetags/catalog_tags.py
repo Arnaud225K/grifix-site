@@ -39,3 +39,10 @@ def get_material_word(count):
         return "материала"
     else:
         return "материалов"
+    
+
+@register.filter(name='format_price')
+def format_price(value):
+    if value is not None:
+        return f"{value:,.0f}".replace(",", " ")
+    return "0"

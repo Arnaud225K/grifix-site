@@ -10,7 +10,7 @@
     <div class="hits__slider-img"> <img src="{{media_url}}{{ product.image }}" alt="{{ product.name }}"></div>
     <div class="hits__slider-descr">
         <div>из {{ product.count_unique_materials }} {{ product.count_unique_materials|get_material_word }}</div>
-        <div>от<span> {{ product.price }} ₽</span></div>
+        <div>от<span> {{ product.formatted_price }} ₽</span></div>
     </div>
     <div class="slider__overlay"> <a class="slider__overlay-link" href="{{ product.get_absolute_url }}">Подробнее</a></div>
 </div>

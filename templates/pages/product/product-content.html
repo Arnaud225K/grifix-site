@@ -1,4 +1,5 @@
-<div class="house__info" data-house-id="{{ product.id }}">
+{% load catalog_tags %}
+<div class="house__info" data-house-id="{{ product.id }}" data-house-slug="{{ product.slug }}">
     <p class="house__info-capt">Для расчета итоговой стоимости выберите материал и площадь дома </p>
 
     <div class="house__info-dropdowns">
@@ -27,13 +28,14 @@
     {% for price_house in material_with_price_list %}
         <div class="offer">
             <p>{{ price_house.material__name }}</p>
-            <p>от {{ price_house.min_price }} ₽</p>
+            <p>от {{ price_house.min_price|format_price }} ₽</p>
         </div>
     {% endfor %}
     </div>
     <div class="house__info-price">
         <p>Стоимость*:</p>
-        <p id="total-price" class="price__sum">от {{ product.price }} ₽</p>
+        <p id="total-price" class="price__sum">от {{ product.formatted_price }} ₽</p>
+        <p id="min-total-price" class="min_price" style="display:none;">от {{ product.formatted_price }} ₽</p>
         <p>*Транспортные расходы не включены в стоимость дома и рассчитываются индивидуально</p>
         <button id="product-submit"> 
             <span>Отправить форму</span>

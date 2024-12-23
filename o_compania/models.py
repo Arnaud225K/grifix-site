@@ -64,47 +64,47 @@ pre_save.connect(save_filefield, About_us)
 
 
 class Task_company(models.Model):
-    order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
-    about_us = models.ForeignKey(About_us, on_delete=models.CASCADE, blank=True, null=True, related_name="rel_about_task")
-    text = models.CharField(max_length=255, verbose_name="Текст", blank=True, null=True)
-    is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True, default=False)
+	order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
+	about_us = models.ForeignKey(About_us, on_delete=models.CASCADE, blank=True, null=True, related_name="rel_about_task")
+	text = models.CharField(max_length=255, verbose_name="Текст", blank=True, null=True)
+	is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True, default=False)
 
-    class Meta:
-        ordering = ["order_number"]
-        verbose_name_plural = 'Задачи'
+	class Meta:
+		ordering = ["order_number"]
+		verbose_name_plural = 'Задачи'
 
-    def __str__(self):
-        return self.text
+	def __str__(self):
+		return self.text
 	
 
 class Principle(models.Model):
-    order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
-    about_us = models.ForeignKey(About_us, on_delete=models.CASCADE, blank=True, null=True, related_name="rel_about_principle")
-    text = models.CharField(max_length=255, verbose_name="Текст", blank=True, null=True)
-    is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True, default=False)
+	order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
+	about_us = models.ForeignKey(About_us, on_delete=models.CASCADE, blank=True, null=True, related_name="rel_about_principle")
+	text = models.CharField(max_length=255, verbose_name="Текст", blank=True, null=True)
+	is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True, default=False)
 
-    class Meta:
-        ordering = ["order_number"]
-        verbose_name_plural = 'Принципы работы'
+	class Meta:
+		ordering = ["order_number"]
+		verbose_name_plural = 'Принципы работы'
 
-    def __str__(self):
-        return self.text
+	def __str__(self):
+		return self.text
 	
 
 class Advantage(models.Model):
-    order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
-    about_us = models.ForeignKey(About_us, on_delete=models.CASCADE, blank=True, null=True, related_name="rel_about_advantage")
-    icon = models.ImageField(upload_to='uploads/images', verbose_name="Картинка", blank=True, null=True)
-    title = models.CharField(max_length=255, verbose_name="Название", null=True, unique=True)
-    text = models.CharField(max_length=255, verbose_name="Текст", blank=True, null=True)
-    is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True, default=False)
+	order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
+	about_us = models.ForeignKey(About_us, on_delete=models.CASCADE, blank=True, null=True, related_name="rel_about_advantage")
+	icon = models.ImageField(upload_to='uploads/images', verbose_name="Картинка", blank=True, null=True)
+	title = models.CharField(max_length=255, verbose_name="Название", null=True, unique=True)
+	text = models.CharField(max_length=255, verbose_name="Текст", blank=True, null=True)
+	is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True, default=False)
 
-    class Meta:
-        ordering = ["order_number"]
-        verbose_name_plural = 'Преимущества'
+	class Meta:
+		ordering = ["order_number"]
+		verbose_name_plural = 'Преимущества'
 
-    def __str__(self):
-        return self.title
+	def __str__(self):
+		return self.title
 	
 def delete_filefield(**kwargs):
 	item = kwargs.get('instance')
@@ -129,39 +129,40 @@ pre_save.connect(save_filefield, Advantage)
 
 
 class Review(models.Model):
-    order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
-    filial = models.ForeignKey(Filials, verbose_name="Филиал", blank=True, null=True, related_name="rel_review_filial", on_delete=models.CASCADE)
-    title = models.CharField(max_length=255, verbose_name="Название")
-    video = models.FileField(upload_to='videos/', verbose_name="Видео")
-    is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
+	order_number = models.FloatField(verbose_name="Порядковый номер", blank=True, null=True)
+	filial = models.ForeignKey(Filials, verbose_name="Филиал", blank=True, null=True, related_name="rel_review_filial", on_delete=models.CASCADE)
+	title = models.CharField(max_length=255, verbose_name="Название")
+	# video = models.FileField(upload_to='videos/', verbose_name="Видео")
+	video = models.CharField(max_length=1024, verbose_name="Ссылка на видео")
+	is_hidden = models.BooleanField(verbose_name="Скрыть", blank=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+	
 
-    def __str__(self):
-        return self.title
+	def __str__(self):
+		return self.title
 
-    class Meta:
-        ordering = ["order_number"]
-        verbose_name_plural = "Отзывы"
+	class Meta:
+		ordering = ["order_number"]
+		verbose_name_plural = "Отзывы"
 		
 
-def delete_filefield(**kwargs):
-	item = kwargs.get('instance')
-	if item.video:
-		if os.path.exists(item.video.path):
-			os.remove(item.video.path)
+# def delete_filefield(**kwargs):
+# 	item = kwargs.get('instance')
+# 	if item.video:
+# 		if os.path.exists(item.video.path):
+# 			os.remove(item.video.path)
 
 
-def save_filefield(**kwargs):
-	item = kwargs.get('instance')
-	if item.id:
-		obj = Review.objects.get(id=item.id)
-		if obj.video:
-			if (not item.video) or obj.video.path != item.video.path:
-				if os.path.exists(obj.video.path):
-					os.remove(obj.video.path)
+# def save_filefield(**kwargs):
+# 	item = kwargs.get('instance')
+# 	if item.id:
+# 		obj = Review.objects.get(id=item.id)
+# 		if obj.video:
+# 			if (not item.video) or obj.video.path != item.video.path:
+# 				if os.path.exists(obj.video.path):
+# 					os.remove(obj.video.path)
 
 
-post_delete.connect(delete_filefield, Review)
-pre_save.connect(save_filefield, Review)
+# post_delete.connect(delete_filefield, Review)
+# pre_save.connect(save_filefield, Review)

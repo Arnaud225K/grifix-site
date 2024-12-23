@@ -1,0 +1,123 @@
+{% load static %}
+<section class="filters">
+    <div class="filters__wrapper filters__wrapper-characteristics">
+        <div class="filters__characteristics">
+        {% if material_filter %}
+            <div class="filters__caption">Материал дома</div>
+            <div class="filters__characteristics-options">
+                <div class="filter-button" data-name="material" data-value="">Все</div>
+                {% for material in material_filter %}
+                    <div class="filter-button" data-name="material" data-value="{{ material.slug }}">{{ material.name }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+        <div class="filters__dropdowns">
+            <div id="floor-filter-container" class="filters__dropdowns-item">
+                {% if floor_filter %}
+                    <div class="filters__caption">Этажность</div>
+                        <div class="dropdown__block"><span>Не важно</span>
+                            <div class="dropdown__arrow"></div>
+                            <div class="dropdown__block-content">
+                            {% for item in floor_filter %} 
+                            <label>
+                                <input type="checkbox" name="floor" value="{{ item.floor__slug }}">
+                                <div class="custom-icon"></div>
+                                <span>{{ item.floor__number }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="filters__dropdowns-item">
+                {% if bedroom_filter %}
+                <div class="filters__caption">Число спален</div>
+                <div class="dropdown__block">
+                        <span>Не важно</span>
+                        <div class="dropdown__arrow"></div>
+                        <div class="dropdown__block-content">
+                        {% for item in bedroom_filter %} 
+                        <label>
+                            <input type="checkbox" name="bedroom" value="{{ item.bedroom__slug }}">
+                            <div class="custom-icon"></div>
+                            <span>{{ item.bedroom__number }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="filters__dropdowns-item">
+            {% if bathroom_filter %}
+                <div class="filters__caption">Число санузлов</div>
+                    <div class="dropdown__block"><span>Не важно</span>
+                        <div class="dropdown__arrow"></div>
+                        <div class="dropdown__block-content">
+                        {% for item in bathroom_filter %} 
+                        <label>
+                            <input type="checkbox" name="bathroom" value="{{ item.bathroom__slug }}">
+                            <div class="custom-icon"></div>
+                            <span>{{ item.bathroom__number }}</span>
+                        </label>
+                        {% endfor %} 
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+            <div class="filters__dropdowns-item">
+            {% if dop_param_filter %}
+                <div class="filters__caption">Дополнительные параметры</div>
+                <div class="dropdown__block">
+                    <span>Выбрать</span>
+                    <div class="dropdown__arrow"></div>
+                    <div class="dropdown__block-content">
+                         {% for item in dop_param_filter %}
+                            <label>
+                                <input type="checkbox" name="dop_param" value="{{ item.dop_param__slug }}">
+                                <div class="custom-icon"></div>
+                                <span>{{ item.dop_param__name }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="filters__wrapper filters__wrapper-price">
+        <div class="filters__price">
+            <div class="filters__caption">Цена, ₽</div>
+            <div class="filters__price-group"> 
+                <input type="number" placeholder="От" id="price-min">
+                <input type="number" placeholder="До" id="price-max">
+
+                <input type="hidden" id="price-min-db" value="{{ min_price }}">
+                <input type="hidden" id="price-max-db" value="{{ max_price }}">
+            </div>
+        </div>
+        <div class="filters__price-range" id="range"></div>
+    </div>
+    <div class="filters__btn-group">
+        <button id="show-products" class="show-products-filter"> 
+            <span>Показать</span>
+            <div class="img">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 19L19.5 12M19.5 12L12.5 5M19.5 12H5.5" stroke="white" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+        </button>
+        <button class="clear-filters" id="clear-filters"> 
+            <span>Сбросить </span>
+            <div class="img"> 
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4L22 22M4 22L22 4" stroke="#2D896A" stroke-width="2.25" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+            </div>
+        </button>
+    </div>
+</section>
