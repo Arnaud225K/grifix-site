@@ -152,7 +152,7 @@ cython_debug/
 .vscode/settings.json
 # End of https://www.toptal.com/developers/gitignore/api/django
 
-# prod_settings.py
+prod_settings.py
 # local_settings.py
 grifix.conf
 gunicorn.conf.py
